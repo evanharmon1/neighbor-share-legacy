@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">NeighborShare</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<header th:fragment="header">
+        <a href="/">
+            <div class="header">
+                <img src="img/logo.png" width="50" alt="Neighbor Share Logo">
+                <h1> NeighborShare</h1>
+            </div>
+        </a>
+</header>
+
+<nav th:fragment="navigation">Browse by:
+    <a href="/all">All</a> |
+    <a href="/category">Category</a> |
+    <a href="/owner">Owner</a>
+</nav>
+
+</body>
+</html>

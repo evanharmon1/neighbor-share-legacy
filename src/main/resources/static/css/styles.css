@@ -1,0 +1,37 @@
+body {
+    font-family: sans-serif;
+    color: #6c71c4;
+    background-color: ghostwhite;
+}
+
+nav {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+input[type=submit] {
+    color: black;
+}
+
+a {
+    color: #2aa198;
+}
+
+option, select {
+    color: black;
+}
+
+.text-danger {
+    color: red;
+}
+
+.header {
+    text-decoration: none;
+    margin: 10px;
+}
+
+h1 {
+    display: inline;
+    font-size: 3em;
+    margin: 10px;
+}
