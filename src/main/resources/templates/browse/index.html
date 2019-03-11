@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+
+<body>
+    <header th:replace="fragments :: header"></header>
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <ul>
+        <li th:each="item : ${items}">Items</li>
+        <p th:text="${item.name}">name</p>
+        <p th:text="${item.description}">description</p>
+        <p th:text="${item.category}">category</p>
+        <p th:text="${item.image}">image</p>
+    </ul>
+</body>
+</html>

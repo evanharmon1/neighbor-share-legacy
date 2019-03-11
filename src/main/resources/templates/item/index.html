@@ -7,5 +7,12 @@
     <header th:replace="fragments :: header"></header>
 
     <nav th:replace="fragments :: navigation"></nav>
+
+    <ul th:each="item : ${items}">
+        <li th:text="${item.name}"></li>
+        <li th:text="${item.description}"></li>
+        <li th:text="${item.image}"></li>
+        <li th:text="${item.category}"></li>
+    </ul>
 </body>
 </html>

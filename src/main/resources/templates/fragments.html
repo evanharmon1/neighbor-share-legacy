@@ -22,6 +22,9 @@
 <nav th:fragment="navigation">Browse by:
     <a href="/all">All</a> |
     <a href="/category">Category</a> |
+    <ul th:each="category : ${categories}">
+        <li th:text="${category.name}"></li>
+    </ul>
     <a href="/owner">Owner</a>
 </nav>
 
