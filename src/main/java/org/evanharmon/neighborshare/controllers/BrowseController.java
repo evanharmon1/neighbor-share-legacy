@@ -5,13 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("browse")
+@RequestMapping("view")
 @Controller
 public class BrowseController {
 
     @RequestMapping(value = "")
     public String index(Model model) {
         model.addAttribute("items", Item.getAllItems());
-        return "browse/index";
+        return "view/index";
     }
 }

@@ -5,24 +5,27 @@ import java.util.List;
 
 public class Item {
 
-    private Long id;
+    private Integer id;
 
     private String name;
-
-    private Category category;
 
     private String description;
 
     private String image;
 
+    private Category category;
+
+    private User owner;
+
+    // Prototyping
     private static List<Item> allItems = new ArrayList<>();
 
-    public Item(Long id, String name, Category category, String description, String image) {
+    public Item(Integer id, String name, String description, String image, Category category) {
         this.id = id;
         this.name = name;
-        this.category = category;
         this.description = description;
         this.image = image;
+        this.category = category;
     }
 
     public String getName() {
@@ -57,14 +60,35 @@ public class Item {
         this.image = image;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                ", category=" + category +
+                ", owner=" + owner +
+                '}';
+    }
+
+    // Prototyping
     public static List<Item> getAllItems() {
         return allItems;
     }

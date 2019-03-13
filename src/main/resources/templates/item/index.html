@@ -12,7 +12,19 @@
         <li th:text="${item.name}"></li>
         <li th:text="${item.description}"></li>
         <li th:text="${item.image}"></li>
-        <li th:text="${item.category}"></li>
+        <li th:text="${item.category.name}"></li>
+    </ul>
+
+    <ul th:each="user : ${users}">
+        <li th:text="${user.firstName}"></li>
+        <li th:text="${user.lastName}"></li>
+        <li th:text="${user.email}"></li>
+        <li th:text="${user.password}"></li>
+    </ul>
+
+    <ul th:each="group : ${groups}">
+        <li th:text="${group.name}"></li>
+        <li th:text="${group.description}"></li>
     </ul>
 </body>
 </html>
