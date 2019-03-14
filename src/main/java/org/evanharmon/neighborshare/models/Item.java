@@ -1,7 +1,6 @@
 package org.evanharmon.neighborshare.models;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Item {
 
@@ -18,7 +17,7 @@ public class Item {
     private User owner;
 
     // Prototyping
-    private static List<Item> allItems = new ArrayList<>();
+    private static ArrayList<Item> allItems = new ArrayList<>();
 
     public Item(Integer id, String name, String description, String image, Category category) {
         this.id = id;
@@ -89,7 +88,7 @@ public class Item {
     }
 
     // Prototyping
-    public static List<Item> getAllItems() {
+    public static ArrayList<Item> getAllItems() {
         return allItems;
     }
 

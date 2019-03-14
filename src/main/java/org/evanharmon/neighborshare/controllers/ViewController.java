@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("view")
 @Controller
-public class BrowseController {
+public class ViewController {
 
     @RequestMapping(value = "")
     public String index(Model model) {

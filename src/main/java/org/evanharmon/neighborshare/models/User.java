@@ -1,7 +1,6 @@
 package org.evanharmon.neighborshare.models;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class User {
 
@@ -15,12 +14,12 @@ public class User {
 
     private String lastName;
 
-    private List<Group> groups = new ArrayList<>();
+    private ArrayList<Group> groups = new ArrayList<>();
 
-    private List<Item> items = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList<>();
 
     // Prototyping
-    private static List<User> allUsers = new ArrayList<>();
+    private static ArrayList<User> allUsers = new ArrayList<>();
 
     public User(Integer id, String email, String password, String firstName, String lastName) {
         this.id = id;
@@ -70,7 +69,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public List<Group> getGroups() {
+    public ArrayList<Group> getGroups() {
         return groups;
     }
 
@@ -82,7 +81,7 @@ public class User {
         this.groups.remove(group);
     }
 
-    public List<Item> getItems() {
+    public ArrayList<Item> getItems() {
         return items;
     }
 
@@ -108,7 +107,7 @@ public class User {
     }
 
     // Prototyping
-    public static List<User> getAllUsers() {
+    public static ArrayList<User> getAllUsers() {
         return allUsers;
     }
 

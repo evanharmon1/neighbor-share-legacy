@@ -1,7 +1,6 @@
 package org.evanharmon.neighborshare.models;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Group {
 
@@ -11,10 +10,10 @@ public class Group {
 
     private String description;
 
-    private List<User> users = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
 
     // Prototyping
-    private static List<Group> allGroups = new ArrayList<>();
+    private static ArrayList<Group> allGroups = new ArrayList<>();
 
     public Group(Integer id, String name, String description) {
         this.id = id;
@@ -46,7 +45,7 @@ public class Group {
         this.description = description;
     }
 
-    public List<User> getUsers() {
+    public ArrayList<User> getUsers() {
         return users;
     }
 
@@ -69,7 +68,7 @@ public class Group {
     }
 
     // Prototyping
-    public static List<Group> getAllGroups() {
+    public static ArrayList<Group> getAllGroups() {
         return allGroups;
     }
 
