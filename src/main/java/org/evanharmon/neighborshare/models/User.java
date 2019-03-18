@@ -20,13 +20,19 @@ public class User {
 
     // Prototyping
     private static ArrayList<User> allUsers = new ArrayList<>();
+    private static Integer nextId = 1;
 
-    public User(Integer id, String email, String password, String firstName, String lastName) {
-        this.id = id;
+    public User(String email, String password, String firstName, String lastName) {
+        this();
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public User() {
+        this.id = nextId;
+        nextId++;
     }
 
     public Integer getId() {

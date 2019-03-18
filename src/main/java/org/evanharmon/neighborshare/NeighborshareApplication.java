@@ -20,8 +20,8 @@ public class NeighborshareApplication {
 		Item.addAllItems(newItem);
 		Item.addAllItems(secondItem);
 
-		User fred = new User(1, "fred@nietzsche.com", "pass", "Fred", "Nietzsche");
-		User ludwig = new User(2, "ludwig@wittgenstein.com", "pass", "Ludwig", "Wittgenstein");
+		User fred = new User("fred@nietzsche.com", "pass", "Fred", "Nietzsche");
+		User ludwig = new User("ludwig@wittgenstein.com", "pass", "Ludwig", "Wittgenstein");
 
 		User.addAllUsers(fred);
 		User.addAllUsers(ludwig);
