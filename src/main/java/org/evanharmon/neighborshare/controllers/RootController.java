@@ -35,6 +35,7 @@ public class RootController {
             model.addAttribute("title", "Register");
             return "register";
         }
+
         User.addAllUsers(newUser);
         model.addAttribute("title", "User");
         return "redirect:/user";
@@ -48,13 +49,9 @@ public class RootController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String processlogin(@ModelAttribute @Valid User newUser, Errors errors, Model model) {
+    public String processlogin(Model model) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Login");
-            return "login";
-        }
-        model.addAttribute("title", "login");
+        model.addAttribute("title", "User");
         return "redirect:/user";
     }
 }

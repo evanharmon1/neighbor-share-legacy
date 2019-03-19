@@ -29,7 +29,6 @@ public class Item {
 
     public Item(String name, String description, Category category) {
         this();
-        this.id = id;
         this.name = name;
         this.description = description;
         this.category = category;

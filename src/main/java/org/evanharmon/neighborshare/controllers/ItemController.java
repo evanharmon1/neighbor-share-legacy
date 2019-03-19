@@ -6,8 +6,12 @@ import org.evanharmon.neighborshare.models.Category;
 import org.evanharmon.neighborshare.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 @RequestMapping("item")
 @Controller
@@ -29,5 +33,20 @@ public class ItemController {
         model.addAttribute(new Item());
         model.addAttribute("categories", Category.values());
         return "item/add";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String add(@ModelAttribute @Valid Item newItem, Model model, Errors errors) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Item");
+            return "redirect:/item/add";
+        }
+
+
+        Item.addAllItems(newItem);
+        model.addAttribute("title", "Item");
+        model.addAttribute("items", Item.getAllItems());
+        return "item/index";
     }
 }

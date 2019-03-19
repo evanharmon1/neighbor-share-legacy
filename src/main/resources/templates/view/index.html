@@ -8,14 +8,11 @@
 
     <nav th:replace="fragments :: navigation"></nav>
 
-    <ul>
-        <li th:each="item : ${items}">Items</li>
-        <p th:text="${item.name}">name</p>
-        <p th:text="${item.description}">description</p>
-        <p th:text="${item.category}">category</p>
-        <p th:text="${item.image}">image</p>
+    <ul th:each="item : ${items}">
+        <li th:text="${item.name}">name</li>
+        <li th:text="${item.description}">description</li>
+        <li th:text="${item.category}">category</li>
     </ul>
-
 
     <div th:replace="fragments :: bootstrap"></div>
 </body>

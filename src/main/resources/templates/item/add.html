@@ -8,6 +8,29 @@
 
     <nav th:replace="fragments :: navigation"></nav>
 
+    <form method="post" th:object="${item}">
+        <div class="form-group">
+            <label th:for="name">Name</label>
+            <input class="form-control" type="text" th:field="*{name}" aria-describedby="nameHelpBlock"/>
+            <small th:errors="*{name}" id="nameHelpBlock" class="form-text text-muted text-danger"></small>
+        </div>
+        <div class="form-group">
+            <label th:for="description">Description</label>
+            <input class="form-control" type="text" th:field="*{description}" aria-describedby="descriptionHelpBlock"/>
+            <small th:errors="*{description}" id="descriptionHelpBlock" class="form-text text-muted text-danger"></small>
+        </div>
+        <div class="form-group">
+            <label th:for="category">Category</label>
+            <select th:field="*{category}">
+                <option th:each="category : ${categories}"
+                        th:text="${category.name}"
+                        th:value="${category}">
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
 
     <div th:replace="fragments :: bootstrap"></div>
 </body>
