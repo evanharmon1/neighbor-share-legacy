@@ -7,7 +7,8 @@ public enum Category {
     FURNITURE ("Furniture"),
     CAMPING ("Camping"),
     SPORTS ("Sports"),
-    ELECTRONICS ("Electronics");
+    ELECTRONICS ("Electronics"),
+    MISCELLANEOUS ("Miscellaneous");
 
     private final String name;
 

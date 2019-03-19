@@ -1,24 +1,37 @@
 package org.evanharmon.neighborshare.models;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 
 public class Group {
 
     private Integer id;
 
+    @NotNull
+    @Size(min=2, max=30)
     private String name;
 
+    @NotNull
+    @Size(min=2, max=280)
     private String description;
 
     private ArrayList<User> users = new ArrayList<>();
 
     // Prototyping
     private static ArrayList<Group> allGroups = new ArrayList<>();
+    private static Integer nextId = 1;
 
-    public Group(Integer id, String name, String description) {
+    public Group(String name, String description) {
+        this();
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    public Group() {
+        this.id = nextId;
+        nextId++;
     }
 
     public Integer getId() {

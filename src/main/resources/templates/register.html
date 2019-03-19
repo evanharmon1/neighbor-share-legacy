@@ -4,30 +4,39 @@
 <head th:replace="fragments :: head"></head>
 <body>
 
-    <form method="post">
-        <div class="form-group">
-            <label>Email</label>
-            <input class="form-control" type="email" name="email"/>
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input class="form-control" type="password" name="password" />
-        </div>
-        <div class="form-group">
-            <label>Verify Password</label>
-            <input class="form-control" type="password" name="verifyPassword" />
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>First Name</label>
-                <input class = "form-control" type="text" name="firstName" />
+    <header th:replace="fragments :: header"></header>
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <form method="post" th:object="${user}">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label th:for="firstName">First Name</label>
+                <input class="form-control" type="text" th:field="*{firstName}" aria-describedby="firstNameHelpBlock"/>
+                <small th:errors="*{firstName}" id="firstNameHelpBlock" class="form-text text-muted text-danger"></small>
             </div>
-            <div class="col">
-                <label>Last Name</label>
-                <input class = "form-control" type="text" name="lastName" />
+            <div class="form-group col-md-6">
+                <label th:for="lastName">Last Name</label>
+                <input class="form-control" type="text" th:field="*{lastName}" aria-describedby="lastNameHelpBlock"/>
+                <small th:errors="*{lastName}" id="lastNameHelpBlock" class="form-text text-muted text-danger"></small>
             </div>
         </div>
-        <input type="submit" value="Submit" />
+        <div class="form-group">
+            <label th:for="email">Email</label>
+            <input class="form-control" type="email" th:field="*{email}" aria-describedby="emailHelpBlock"/>
+            <small th:errors="*{email}" id="emailHelpBlock" class="form-text text-muted text-danger"></small>
+        </div>
+        <div class="form-group">
+            <label th:for="password">Password</label>
+            <input class="form-control" type="password" th:field="*{password}" aria-describedby="passwordHelpBlock"/>
+            <small th:errors="*{password}" id="passwordHelpBlock" class="form-text text-muted text-danger"></small>
+        </div>
+        <!--<div class="form-group">-->
+            <!--<label th:for="verifyPassword">Verify Password</label>-->
+            <!--<input class="form-control" type="password" th:field="*{verifyPassword}" aria-describedby="verifyPasswordHelpBlock"/>-->
+            <!--<small th:errors="*{verifyPassword}" id="verifyPasswordHelpBlock" class="form-text text-muted error"></small>-->
+        <!--</div>-->
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
 

@@ -20,13 +20,17 @@
         </a>
 </header>
 
+
+
 <nav th:fragment="navigation">Browse by:
     <a href="/all">All</a> |
     <a href="/category">Category</a> |
     <ul th:each="category : ${categories}">
         <li th:text="${category.name}"></li>
     </ul>
-    <a href="/owner">Owner</a>
+    <a href="/owner">Owner</a> |
+    <a href="/login">Login</a> |
+    <a href="/register">Register</a>
 </nav>
 
 <div th:fragment="bootstrap">

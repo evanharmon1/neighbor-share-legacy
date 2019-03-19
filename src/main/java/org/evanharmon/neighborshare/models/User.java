@@ -1,17 +1,27 @@
 package org.evanharmon.neighborshare.models;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 
 public class User {
 
     private Integer id;
 
+    @NotNull
+    @Size(min=1, message = "email must not be empty")
     private String email;
 
+    @NotNull
+    @Size(min=4, max=30)
     private String password;
 
+    @NotNull
+    @Size(min=2, max=30)
     private String firstName;
 
+    @NotNull
+    @Size(min=2, max=30)
     private String lastName;
 
     private ArrayList<Group> groups = new ArrayList<>();

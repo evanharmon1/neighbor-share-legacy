@@ -14,8 +14,8 @@ public class NeighborshareApplication {
 		SpringApplication.run(NeighborshareApplication.class, args);
 
 		//Prototyping
-		Item newItem = new Item(1, "Lawn Mower", "Vroom", "path", Category.LAWNCARE);
-		Item secondItem = new Item(2, "Pressure Cooker", "Boom", "path", Category.COOKING);
+		Item newItem = new Item("Lawn Mower", "Vroom", Category.LAWNCARE);
+		Item secondItem = new Item("Pressure Cooker", "Boom", Category.COOKING);
 
 		Item.addAllItems(newItem);
 		Item.addAllItems(secondItem);
@@ -32,8 +32,8 @@ public class NeighborshareApplication {
 		System.out.println(newItem.getOwner());
 		System.out.println((secondItem.getOwner()));
 
-		Group harmons = new Group(1, "The Nietzsches", "Nietzsches, etc.");
-		Group taylors = new Group(2, "The Wittgensteins", "Wittgenstein...");
+		Group harmons = new Group("The Nietzsches", "Nietzsches, etc.");
+		Group taylors = new Group("The Wittgensteins", "Wittgenstein...");
 
 		harmons.addUser(fred);
 		taylors.addUser(ludwig);

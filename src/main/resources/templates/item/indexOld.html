@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+
+<body>
+    <header th:replace="fragments :: header"></header>
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <ul th:each="item : ${items}">
+        <li th:text="${item.name}"></li>
+        <li th:text="${item.description}"></li>
+        <li th:text="${item.image}"></li>
+        <li th:text="${item.category.name}"></li>
+    </ul>
+
+    <ul th:each="user : ${users}">
+        <li th:text="${user.firstName}"></li>
+        <li th:text="${user.lastName}"></li>
+        <li th:text="${user.email}"></li>
+        <li th:text="${user.password}"></li>
+    </ul>
+
+    <ul th:each="group : ${groups}">
+        <li th:text="${group.name}"></li>
+        <li th:text="${group.description}"></li>
+    </ul>
+
+
+    <div th:replace="fragments :: bootstrap"></div>
+</body>
+</html>

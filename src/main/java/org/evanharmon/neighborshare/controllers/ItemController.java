@@ -25,6 +25,8 @@ public class ItemController {
 
     @RequestMapping(value="/add", method = RequestMethod.GET)
     public String add(Model model) {
+        model.addAttribute("title", "Add Item");
+        model.addAttribute(new Item());
         model.addAttribute("categories", Category.values());
         return "item/add";
     }
