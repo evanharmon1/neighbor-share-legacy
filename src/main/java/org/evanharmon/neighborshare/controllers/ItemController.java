@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 @RequestMapping("item")
 @Controller
@@ -36,17 +37,22 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(@ModelAttribute @Valid Item newItem, Model model, Errors errors) {
+    public String add(@ModelAttribute @Valid Item newItem, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Item");
-            return "redirect:/item/add";
+            model.addAttribute("categories", Category.values());
+            return "item/add";
         }
 
 
         Item.addAllItems(newItem);
+        ArrayList<User> users = User.getAllUsers();
+        User protoUser = users.get(0);
+        protoUser.addItem(newItem);
+        newItem.setOwner(protoUser);
         model.addAttribute("title", "Item");
         model.addAttribute("items", Item.getAllItems());
-        return "item/index";
+        return "redirect:/item";
     }
 }

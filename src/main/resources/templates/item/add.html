@@ -8,7 +8,7 @@
 
     <nav th:replace="fragments :: navigation"></nav>
 
-    <form method="post" th:object="${item}">
+    <form method="post" th:object="${item}" id="add-item-form">
         <div class="form-group">
             <label th:for="name">Name</label>
             <input class="form-control" type="text" th:field="*{name}" aria-describedby="nameHelpBlock"/>
@@ -16,17 +16,18 @@
         </div>
         <div class="form-group">
             <label th:for="description">Description</label>
-            <input class="form-control" type="text" th:field="*{description}" aria-describedby="descriptionHelpBlock"/>
+            <textarea class="form-control" th:field="*{description}" aria-describedby="descriptionHelpBlock" rows="4" cols="5">Text</textarea>
             <small th:errors="*{description}" id="descriptionHelpBlock" class="form-text text-muted text-danger"></small>
         </div>
         <div class="form-group">
             <label th:for="category">Category</label>
-            <select th:field="*{category}">
+            <select th:field="*{category}" aria-describedby="descriptionHelpBlock">
                 <option th:each="category : ${categories}"
                         th:text="${category.name}"
                         th:value="${category}">
                 </option>
             </select>
+            <small th:errors="*{category}" id="categoryHelpBlock" class="form-text text-muted text-danger"></small>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

@@ -13,7 +13,7 @@ public class Item {
     private String name;
 
     @NotNull
-    @Size(min=2, max=280)
+    @Size(min=2, max=999)
     private String description;
 
     @NotNull
@@ -93,9 +93,9 @@ public class Item {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", image='" + image + '\'' +
                 ", category=" + category +
                 ", owner=" + owner +
+                ", image='" + image + '\'' +
                 '}';
     }
 
