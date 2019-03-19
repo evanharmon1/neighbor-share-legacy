@@ -24,8 +24,6 @@ public class User {
     @Size(min=2, max=30)
     private String lastName;
 
-    private ArrayList<Group> groups = new ArrayList<>();
-
     private ArrayList<Item> items = new ArrayList<>();
 
     // Prototyping
@@ -85,18 +83,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public ArrayList<Group> getGroups() {
-        return groups;
-    }
-
-    public void addGroup(Group group) {
-        this.groups.add(group);
-    }
-
-    public void removeGroup(Group group) {
-        this.groups.remove(group);
-    }
-
     public ArrayList<Item> getItems() {
         return items;
     }
@@ -114,7 +100,6 @@ public class User {
         return "User{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", groups=" + groups +
                 '}';
     }
 

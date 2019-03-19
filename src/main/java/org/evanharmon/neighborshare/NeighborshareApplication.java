@@ -1,6 +1,5 @@
 package org.evanharmon.neighborshare;
 
-import org.evanharmon.neighborshare.models.Group;
 import org.evanharmon.neighborshare.models.Item;
 import org.evanharmon.neighborshare.models.Category;
 import org.evanharmon.neighborshare.models.User;
@@ -31,18 +30,6 @@ public class NeighborshareApplication {
 
 		System.out.println(newItem.getOwner());
 		System.out.println((secondItem.getOwner()));
-
-		Group harmons = new Group("The Nietzsches", "Nietzsches, etc.");
-		Group taylors = new Group("The Wittgensteins", "Wittgenstein...");
-
-		harmons.addUser(fred);
-		taylors.addUser(ludwig);
-
-		Group.addAllGroups(harmons);
-		Group.addAllGroups(taylors);
-
-		System.out.println(Group.getAllGroups());
-
 
 	}
 

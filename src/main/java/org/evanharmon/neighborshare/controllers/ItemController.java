@@ -1,6 +1,5 @@
 package org.evanharmon.neighborshare.controllers;
 
-import org.evanharmon.neighborshare.models.Group;
 import org.evanharmon.neighborshare.models.Item;
 import org.evanharmon.neighborshare.models.Category;
 import org.evanharmon.neighborshare.models.User;
@@ -23,7 +22,6 @@ public class ItemController {
         model.addAttribute("items", Item.getAllItems());
         model.addAttribute("categories", Category.values());
         model.addAttribute("users", User.getAllUsers());
-        model.addAttribute("groups", Group.getAllGroups());
         return "item/index";
     }
 
