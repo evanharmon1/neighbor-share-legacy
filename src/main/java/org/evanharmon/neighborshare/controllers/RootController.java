@@ -1,6 +1,8 @@
 package org.evanharmon.neighborshare.controllers;
 
 import org.evanharmon.neighborshare.models.User;
+import org.evanharmon.neighborshare.models.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -14,6 +16,9 @@ import javax.validation.Valid;
 
 @Controller
 public class RootController {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @RequestMapping(value = "")
     public String index(Model model) {
@@ -36,8 +41,9 @@ public class RootController {
             return "register";
         }
 
-        User.addAllUsers(newUser);
+
         model.addAttribute("title", "User");
+        userRepository.save(newUser);
         return "redirect:/user";
     }
 

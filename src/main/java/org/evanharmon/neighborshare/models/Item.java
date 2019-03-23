@@ -1,12 +1,19 @@
 package org.evanharmon.neighborshare.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 
+@Entity
 public class Item {
 
-    private Integer id;
+    @Id
+    @GeneratedValue
+    private int id;
 
     @NotNull
     @Size(min=2, max=30)
@@ -16,35 +23,23 @@ public class Item {
     @Size(min=2, max=999)
     private String description;
 
-    @NotNull
+    @ManyToOne
     private Category category;
 
+    @ManyToOne
     private User owner;
 
     private String image;
 
-    // Prototyping
-    private static ArrayList<Item> allItems = new ArrayList<>();
-    private static Integer nextId = 1;
-
-    public Item(String name, String description, Category category) {
-        this();
+    public Item(String name, String description) {
         this.name = name;
         this.description = description;
-        this.category = category;
     }
 
-    public Item(){
-        this.id = nextId;
-        nextId++;
-    }
+    public Item(){ }
 
-    public Integer getId() {
+    public int getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -99,12 +94,4 @@ public class Item {
                 '}';
     }
 
-    // Prototyping
-    public static ArrayList<Item> getAllItems() {
-        return allItems;
-    }
-
-    public static void addAllItems(Item item) {
-        Item.allItems.add(item);
-    }
 }

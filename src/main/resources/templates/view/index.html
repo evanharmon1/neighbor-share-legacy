@@ -11,7 +11,7 @@
     <ul th:each="item : ${items}">
         <li th:text="${item.name}">name</li>
         <li th:text="${item.description}">description</li>
-        <li th:text="${item.category}">category</li>
+        <li th:text="${item.category.name}">category</li>
     </ul>
 
     <div th:replace="fragments :: bootstrap"></div>

@@ -1,12 +1,17 @@
 package org.evanharmon.neighborshare.models;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class User {
 
-    private Integer id;
+    @Id
+    @GeneratedValue
+    private int id;
 
     @NotNull
     @Size(min=1, message = "email must not be empty")
@@ -24,31 +29,22 @@ public class User {
     @Size(min=2, max=30)
     private String lastName;
 
-    private ArrayList<Item> items = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<Item> items = new ArrayList<>();
 
-    // Prototyping
-    private static ArrayList<User> allUsers = new ArrayList<>();
-    private static Integer nextId = 1;
 
     public User(String email, String password, String firstName, String lastName) {
-        this();
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public User() {
-        this.id = nextId;
-        nextId++;
-    }
+    public User() { }
 
-    public Integer getId() {
+    public int getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getEmail() {
@@ -83,7 +79,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public ArrayList<Item> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
@@ -103,12 +99,4 @@ public class User {
                 '}';
     }
 
-    // Prototyping
-    public static ArrayList<User> getAllUsers() {
-        return allUsers;
-    }
-
-    public static void addAllUsers(User user) {
-        User.allUsers.add(user);
-    }
 }
