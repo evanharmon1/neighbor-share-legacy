@@ -29,8 +29,17 @@
         <li th:text="${category.name}"></li>
     </ul>
     <a href="/owner">Owner</a> |
-    <a href="/login">Login</a> |
-    <a href="/register">Register</a>
+    <a href="/view">View</a> |
+    <a href="/item">Item</a>
+    <form name="logoutForm" th:action="@{/logout}" method="post">
+        <input class = "btn btn-dark" type="submit" value="Logout"/>
+    </form>
+    <form name="loginForm" th:action="@{/login}" method="get">
+        <input class = "btn btn-dark" type="submit" value="Login"/>
+    </form>
+    <form name="registerForm" th:action="@{/register}" method="get">
+        <input class = "btn btn-dark" type="submit" value="Register"/>
+    </form>
 </nav>
 
 <div th:fragment="bootstrap">

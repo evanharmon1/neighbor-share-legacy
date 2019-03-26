@@ -39,3 +39,7 @@ h1 {
 textarea {
     max-width: 400px;
 }
+
+form {
+    display: inline;
+}

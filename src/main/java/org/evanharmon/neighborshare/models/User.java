@@ -1,25 +1,38 @@
 package org.evanharmon.neighborshare.models;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.annotation.sql.DataSourceDefinition;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue
     private int id;
 
     @NotNull
+    private String username;
+
+    @NotNull
     @Size(min=1, message = "email must not be empty")
     private String email;
 
     @NotNull
-    @Size(min=4, max=30)
+    @Size(min=4, max=255)
     private String password;
+
+    @NotNull
+    private String verifyPassword;
 
     @NotNull
     @Size(min=2, max=30)
@@ -33,8 +46,34 @@ public class User {
     @JoinColumn(name = "user_id")
     private List<Item> items = new ArrayList<>();
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Arrays.asList(new SimpleGrantedAuthority("USER"));
+    }
 
-    public User(String email, String password, String firstName, String lastName) {
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
+    public User(String username, String email, String password, String firstName, String lastName) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -45,6 +84,14 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -61,6 +108,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getVerifyPassword() {
+        return verifyPassword;
+    }
+
+    public void setVerifyPassword(String verifyPassword) {
+        this.verifyPassword = verifyPassword;
     }
 
     public String getFirstName() {
@@ -94,9 +149,13 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", authority=" + getAuthorities() +
                 '}';
     }
-
 }

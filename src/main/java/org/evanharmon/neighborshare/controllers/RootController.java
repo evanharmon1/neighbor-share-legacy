@@ -3,6 +3,11 @@ package org.evanharmon.neighborshare.controllers;
 import org.evanharmon.neighborshare.models.User;
 import org.evanharmon.neighborshare.models.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -12,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -19,6 +26,8 @@ public class RootController {
 
     @Autowired
     private UserRepository userRepository;
+
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @RequestMapping(value = "")
     public String index(Model model) {
@@ -30,6 +39,7 @@ public class RootController {
     public String register(Model model) {
         model.addAttribute("title", "Register");
         model.addAttribute(new User());
+
         return "register";
     }
 
@@ -43,6 +53,7 @@ public class RootController {
 
 
         model.addAttribute("title", "User");
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         userRepository.save(newUser);
         return "redirect:/user";
     }
@@ -55,9 +66,35 @@ public class RootController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String processlogin(Model model) {
+    public String processlogin(@ModelAttribute @Valid User user, Errors errors, Model model) {
 
-        model.addAttribute("title", "User");
-        return "redirect:/user";
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Login");
+            return "login";
+        }
+
+        User existingUser = userRepository.findByUsername(user.getUsername());
+
+        if (existingUser.getUsername() == user.getUsername()) {
+            if (existingUser.getPassword() == user.getPassword()) {
+                return "redirect:/view";
+            }
+            else {
+                model.addAttribute("title", "Login");
+                model.addAttribute("errors", "Password not correct");
+                return "login";
+            }
+        }
+        else {
+            model.addAttribute("title", "Login");
+            model.addAttribute("errors", "User not found");
+            return "login";
+        }
+
+    }
+
+    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    public String logout() {
+        return "redirect:/login";
     }
 }
