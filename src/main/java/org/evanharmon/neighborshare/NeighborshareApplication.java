@@ -12,6 +12,8 @@ public class NeighborshareApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(NeighborshareApplication.class, args);
 
+
+
 	}
 
 }

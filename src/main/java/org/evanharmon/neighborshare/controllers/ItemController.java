@@ -54,18 +54,33 @@ public class ItemController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(@ModelAttribute @Valid Item newItem, Errors errors, @RequestParam(value = "categoryId", required=false) Integer categoryId, Model model) {
 
-        if (errors.hasErrors() || categoryId == null) {
-            model.addAttribute("title", "Add Item");
-            model.addAttribute("categories", categoryRepository.findAll());
-            if (categoryId == null) {
-                model.addAttribute("categoryError", "You must choose a category");
-            }
-            return "item/add";
-        }
+//        if (errors.hasErrors() || categoryId == null) {
+//            model.addAttribute("title", "Add Item");
+//            model.addAttribute("categories", categoryRepository.findAll());
+//            if (categoryId == null) {
+//                model.addAttribute("categoryError", "You must choose a category");
+//            }
+//            return "item/add";
+//        }
+
+        //Test Item add
+        User testUser = userRepository.findByUsername("alby");
+        Category testCategory = categoryRepository.getOne(2);
+        Item testItem = new Item(99, "testName", "testDescription", testCategory, testUser);
+        itemRepository.save(testItem);
 
         Optional<Category> cat = categoryRepository.findById(categoryId);
         Category category = cat.get();
         newItem.setCategory(category);
+
+        User currentUser = User.getCurrentUser();
+        newItem.setUser(currentUser);
+
+        //Error here I think
+        //There was an unexpected error (type=Internal Server Error, status=500).
+        //failed to lazily initialize a collection of role: org.evanharmon.neighborshare.models.User.items, could not initialize proxy - no Session
+        //org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: org.evanharmon.neighborshare.models.User.items, could not initialize proxy - no Session
+        currentUser.addItem(newItem);
         itemRepository.save(newItem);
 
         model.addAttribute("title", "Item");

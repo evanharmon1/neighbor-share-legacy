@@ -25,6 +25,12 @@ public class ViewController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
 
+        User currentUser = User.getCurrentUser();
+
+        List<Item> userItems = currentUser.getItems();
+
+        model.addAttribute("items", userItems);
+
         return "view/index";
     }
 }
