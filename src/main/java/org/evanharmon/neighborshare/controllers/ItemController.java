@@ -88,4 +88,36 @@ public class ItemController {
         return "item/item-detail";
 
     }
+
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+    public String editItem(@PathVariable int id, Model model) {
+
+        Optional<Item> optItem = itemRepository.findById(id);
+        Item item = optItem.get();
+
+        model.addAttribute("item", item);
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("users", userRepository.findAll());
+        return "item/edit";
+
+    }
+
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public String processEditItem(int itemId, String name, String description, int categoryId) {
+
+        Optional<Item> optItem = itemRepository.findById(itemId);
+        Item item = optItem.get();
+
+        Optional<Category> cat = categoryRepository.findById(categoryId);
+        Category category = cat.get();
+
+
+        item.setName(name);
+        item.setDescription(description);
+        item.setCategory(category);
+        itemRepository.save(item);
+
+        return "redirect:/item/" + itemId;
+    }
+
 }
