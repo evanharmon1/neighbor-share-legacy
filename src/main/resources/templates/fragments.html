@@ -20,29 +20,38 @@
         </a>
 </header>
 
-
-
 <nav th:fragment="navigation">Browse by:
-    <a href="/all">All</a> |
+    <a href="/view">All</a> |
+
+    <div class="dropdown">
+        <button class="dropbtn">Dropdown</button>
+        <div class="dropdown-content">
+            <a th:href="'/view/category/' + ${category.id}" th:each="category : ${categories}" th:text="${category.name}">Category Name</a>
+        </div>
+    </div>
+
+
     <a href="/category">Category</a> |
     <ul th:each="category : ${categories}">
         <li th:text="${category.name}"></li>
     </ul>
     <a href="/owner">Owner</a> |
-    <a href="/view">View</a> |
-    <a href="/item">Item</a>
-    <a href="/user">Users</a>
     <a href="/item/add">Add Item</a>
-    <form name="logoutForm" th:action="@{/logout}" method="post">
-        <input class = "btn btn-dark" type="submit" value="Logout"/>
-    </form>
+</nav>
+
+<section th:fragment="user">
+    <div th:if="${currentUser}">
+        <form name="logoutForm" th:action="@{/logout}" method="post">
+            <input class = "btn btn-dark" type="submit" value="Logout"/>
+        </form>
+    </div>
     <form name="loginForm" th:action="@{/login}" method="get">
         <input class = "btn btn-dark" type="submit" value="Login"/>
     </form>
     <form name="registerForm" th:action="@{/register}" method="get">
         <input class = "btn btn-dark" type="submit" value="Register"/>
     </form>
-</nav>
+</section>
 
 <div th:fragment="bootstrap">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
