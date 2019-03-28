@@ -10,6 +10,8 @@
 
     <nav th:replace="fragments :: navigation"></nav>
 
+    <section th:replace="fragments :: item"></section>
+
     <div th:each="item : ${items}" class="col-sm-4">
         <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="/img/items/item00001.JPG" alt="Card image cap" style="width: 18rem;">

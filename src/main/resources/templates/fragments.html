@@ -14,37 +14,42 @@
 <header th:fragment="header">
         <a href="/">
             <div class="header">
-                <img src="img/logo.png" width="50" alt="Neighbor Share Logo">
+                <img src="/img/logo.png" width="50" alt="Neighbor Share Logo">
                 <h1> NeighborShare</h1>
             </div>
         </a>
 </header>
 
 <nav th:fragment="navigation">Browse by:
-    <a href="/view">All</a> |
+    <form name="viewForm" th:action="@{/view}" method="get">
+        <input class = "btn btn-dark" type="submit" value="All"/>
+    </form>
 
     <div class="dropdown">
-        <button class="dropbtn">Dropdown</button>
+        <button class="btn btn-dark">Category</button>
         <div class="dropdown-content">
             <a th:href="'/view/category/' + ${category.id}" th:each="category : ${categories}" th:text="${category.name}">Category Name</a>
         </div>
     </div>
 
-
-    <a href="/category">Category</a> |
-    <ul th:each="category : ${categories}">
-        <li th:text="${category.name}"></li>
-    </ul>
-    <a href="/owner">Owner</a> |
-    <a href="/item/add">Add Item</a>
+    <div class="dropdown">
+        <button class="btn btn-dark">Owner</button>
+        <div class="dropdown-content">
+            <a th:href="'/view/owner/' + ${user.id}" th:each="user : ${users}" th:text="${user.firstName}">Owner Name</a>
+        </div>
+    </div>
 </nav>
 
-<section th:fragment="user">
-    <div th:if="${currentUser}">
-        <form name="logoutForm" th:action="@{/logout}" method="post">
-            <input class = "btn btn-dark" type="submit" value="Logout"/>
-        </form>
-    </div>
+<section th:fragment="item">
+    <form name="addForm" th:action="@{/item/add}" method="get">
+        <input class = "btn btn-dark" type="submit" value="Add Item"/>
+    </form>
+</section>
+
+<section class="user-section" th:fragment="user">
+    <form name="logoutForm" th:action="@{/logout}" method="post">
+        <input class = "btn btn-dark" type="submit" value="Logout"/>
+    </form>
     <form name="loginForm" th:action="@{/login}" method="get">
         <input class = "btn btn-dark" type="submit" value="Login"/>
     </form>

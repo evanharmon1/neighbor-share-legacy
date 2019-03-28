@@ -58,7 +58,30 @@ public class ViewController {
         }
 
         model.addAttribute("items", catItems);
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("users", userRepository.findAll());
         return "view/by-category";
+
+    }
+
+    @RequestMapping(value = "/owner/{id}", method = RequestMethod.GET)
+    public String byOwner(@PathVariable int id, Model model) {
+
+        Optional<User> user = userRepository.findById(id);
+        User owner = user.get();
+
+        List<Item> allItems = itemRepository.findAll();
+        ArrayList<Item> ownerItems = new ArrayList<>();
+        for (Item item: allItems) {
+            if (item.getUser() == owner) {
+                ownerItems.add(item);
+            }
+        }
+
+        model.addAttribute("items", ownerItems);
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("users", userRepository.findAll());
+        return "view/by-owner";
 
     }
 

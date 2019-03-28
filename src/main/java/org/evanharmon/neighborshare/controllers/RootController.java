@@ -1,6 +1,7 @@
 package org.evanharmon.neighborshare.controllers;
 
 import org.evanharmon.neighborshare.models.User;
+import org.evanharmon.neighborshare.models.repository.CategoryRepository;
 import org.evanharmon.neighborshare.models.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

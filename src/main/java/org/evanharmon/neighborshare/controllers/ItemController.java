@@ -75,6 +75,6 @@ public class ItemController {
 
         model.addAttribute("title", "Item");
         model.addAttribute("items", itemRepository.findAll());
-        return "redirect:/item";
+        return "redirect:/view";
     }
 }
