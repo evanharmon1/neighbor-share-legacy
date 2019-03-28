@@ -57,7 +57,7 @@ public class RootController {
         model.addAttribute("title", "User");
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         userRepository.save(newUser);
-        return "redirect:/user";
+        return "redirect:/view";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)

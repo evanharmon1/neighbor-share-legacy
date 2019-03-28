@@ -11,13 +11,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -76,5 +74,18 @@ public class ItemController {
         model.addAttribute("title", "Item");
         model.addAttribute("items", itemRepository.findAll());
         return "redirect:/view";
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String itemDetails(@PathVariable int id, Model model) {
+
+        Optional<Item> optItem = itemRepository.findById(id);
+        Item item = optItem.get();
+
+        model.addAttribute("item", item);
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("users", userRepository.findAll());
+        return "item/item-detail";
+
     }
 }

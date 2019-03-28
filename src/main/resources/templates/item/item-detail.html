@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+
+<body>
+    <header th:replace="fragments :: header"></header>
+
+    <section th:replace="fragments :: user"></section>
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <section th:replace="fragments :: item"></section>
+
+    <div class="card text-center">
+        <div class="card-header">
+            Item Details
+        </div>
+        <div class="card-body">
+            <h5 th:text="${item.name}" class="card-title">Special title treatment</h5>
+            <p th:text="${'Description: ' + item.description}" class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <p th:text="${'Owner: ' + item.user.firstName + ' ' + item.user.lastName}" class="card-text"></p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+
+    <div th:replace="fragments :: bootstrap"></div>
+</body>
+</html>
