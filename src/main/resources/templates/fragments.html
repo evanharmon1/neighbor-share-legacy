@@ -12,7 +12,7 @@
 <body>
 
 <header th:fragment="header">
-        <a href="/">
+        <a href="/view">
             <div class="header">
                 <img src="/img/logo.png" width="50" alt="Neighbor Share Logo">
                 <h1> NeighborShare</h1>
@@ -55,6 +55,15 @@
     </form>
     <form name="registerForm" th:action="@{/register}" method="get">
         <input class = "btn btn-dark" type="submit" value="Register"/>
+    </form>
+    <form name="userForm" th:action="@{/user/currentuser}" method="get">
+        <input class = "btn btn-dark" type="submit" value="User Profile"/>
+    </form>
+</section>
+
+<section class="user-section" th:fragment="loggedin">
+    <form name="logoutForm" th:action="@{/logout}" method="post">
+        <input class = "btn btn-dark" type="submit" value="Logout"/>
     </form>
     <form name="userForm" th:action="@{/user/currentuser}" method="get">
         <input class = "btn btn-dark" type="submit" value="User Profile"/>
