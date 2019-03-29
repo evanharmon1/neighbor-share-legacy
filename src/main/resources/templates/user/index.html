@@ -6,11 +6,36 @@
 
     <header th:replace="fragments :: header"></header>
 
+    <section th:replace="fragments :: user"></section>
+
     <nav th:replace="fragments :: navigation"></nav>
 
-    <ul th:each="user : ${users}">
-        <li th:text="${user}"></li>
-    </ul>
+    <section th:replace="fragments :: item"></section>
+
+    <div class="card text-center">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+            <h2 th:text="${user.firstName + '''s Details'}" class="card-title"></h2>
+            <p th:text="${'First Name: ' + user.firstName}" class="card-text"></p>
+            <p th:text="${'Last Name: ' + user.lastName}" class="card-text"></p>
+            <p th:text="${'Username: ' + user.username}" class="card-text"></p>
+            <p th:text="${'Email: ' + user.email}" class="card-text"></p>
+            <a th:href="${user.id + '/edit'}" class="btn btn-primary">Edit User</a>
+        </div>
+    </div>
+
+    <div th:each="item : ${items}" class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/img/items/item00001.JPG" alt="Card image cap" style="width: 18rem;">
+            <div class="card-body">
+                <a th:href="${'/item/' + item.id}"><h3 class="card-title" th:text="${item.name}">Card title</h3></a>
+                <p class="card-text" th:text="'Category: ' + ${item.category.name}">Category</p>
+                <p class="card-text" th:text="'Owner: ' + ${item.user.firstName}">User</p>
+                <a href="#" class="btn btn-primary">Request Item</a>
+            </div>
+        </div>
+    </div>
 
     <div th:replace="fragments :: bootstrap"></div>
 </body>

@@ -5,7 +5,44 @@
 <body>
     <header th:replace="fragments :: header"></header>
 
+    <section th:replace="fragments :: user"></section>
+
     <nav th:replace="fragments :: navigation"></nav>
+
+    <form method="post" action="/user/edit" th:object="${user}" id="edit-user-form">
+        <div class="form-group">
+            <label th:for="firstName">First Name</label>
+            <input class="form-control" type="text" th:field="*{firstName}" aria-describedby="firstNameHelpBlock"/>
+            <small th:errors="*{firstName}" id="firstNameHelpBlock" class="form-text text-muted text-danger"></small>
+        </div>
+        <div class="form-group">
+            <label th:for="lastName">Last Name</label>
+            <input class="form-control" type="text" th:field="*{lastName}" aria-describedby="lastNameHelpBlock"/>
+            <small th:errors="*{lastName}" id="lastNameHelpBlock" class="form-text text-muted text-danger"></small>
+        </div>
+        <div class="form-group">
+            <label th:for="username">Username</label>
+            <textarea class="form-control" th:field="*{username}" aria-describedby="usernameHelpBlock" rows="4" cols="5">Text</textarea>
+            <small th:errors="*{username}" id="usernameHelpBlock" class="form-text text-muted text-danger"></small>
+        </div>
+        <div class="form-group">
+            <label th:for="email">Email</label>
+            <textarea class="form-control" th:field="*{email}" aria-describedby="emailHelpBlock" rows="4" cols="5">Text</textarea>
+            <small th:errors="*{email}" id="emailHelpBlock" class="form-text text-muted text-danger"></small>
+        </div>
+        <div class="form-group">
+            <label th:for="password">Password</label>
+            <textarea class="form-control" th:field="*{password}" aria-describedby="passwordHelpBlock" rows="4" cols="5">Text</textarea>
+            <small th:errors="*{password}" id="passwordHelpBlock" class="form-text text-muted text-danger"></small>
+        </div>
+        <div class="form-group">
+            <label th:for="verifyPassword">Verify Password</label>
+            <textarea class="form-control" th:field="*{verifyPassword}" aria-describedby="verifyPasswordHelpBlock" rows="4" cols="5">Text</textarea>
+            <small th:errors="*{verifyPassword}" id="verifyPasswordHelpBlock" class="form-text text-muted text-danger"></small>
+        </div>
+        <input type="hidden" th:value="*{id}" name="userId" />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
     <div th:replace="fragments :: bootstrap"></div>
 </body>
