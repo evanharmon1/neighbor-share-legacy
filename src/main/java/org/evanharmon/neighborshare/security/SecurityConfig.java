@@ -1,5 +1,6 @@
 package org.evanharmon.neighborshare.security;
 
+import org.evanharmon.neighborshare.models.User;
 import org.evanharmon.neighborshare.models.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -63,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         return userRepository.findByUsername(username);
                     }
                 })
-                .passwordEncoder(new BCryptPasswordEncoder())
+                .passwordEncoder(User.passwordEncoder)
         ;
     }
 

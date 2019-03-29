@@ -29,8 +29,6 @@ public class RootController {
     @Autowired
     private UserRepository userRepository;
 
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     @RequestMapping(value = "")
     public String index(Model model) {
         model.addAttribute("title", "NeighborShare");
@@ -55,7 +53,7 @@ public class RootController {
 
 
         model.addAttribute("title", "User");
-        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        newUser.setPassword(User.passwordEncoder.encode(newUser.getPassword()));
         userRepository.save(newUser);
         return "redirect:/view";
     }

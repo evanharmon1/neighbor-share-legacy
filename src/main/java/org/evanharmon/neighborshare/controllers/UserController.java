@@ -25,8 +25,6 @@ public class UserController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String userDetails(@PathVariable int id, Model model) {
 
@@ -64,7 +62,7 @@ public class UserController {
         user.setLastName(lastName);
         user.setUsername(username);
         user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(password)); //TODO Doesn't work
+        user.setPassword(User.passwordEncoder.encode(password));
         userRepository.save(user);
 
         return "redirect:/user/" + userId;

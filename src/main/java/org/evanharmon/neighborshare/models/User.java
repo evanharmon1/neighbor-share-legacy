@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.sql.DataSourceDefinition;
 import javax.persistence.*;
@@ -48,6 +49,8 @@ public class User implements UserDetails {
     @OneToMany
     @JoinColumn(name = "user_id")
     private List<Item> items = new ArrayList<>();
+
+    public static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
