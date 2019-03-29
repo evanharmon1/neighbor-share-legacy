@@ -70,5 +70,12 @@ public class UserController {
         return "redirect:/user/" + userId;
     }
 
+    @RequestMapping(value = "currentuser", method = RequestMethod.GET)
+    public String currentUser(Model model){
+
+        User currentUser = User.getCurrentUser();
+        int id = currentUser.getId();
+        return "redirect:/user/" + id;
+    }
 
 }

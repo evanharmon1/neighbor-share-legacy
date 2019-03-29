@@ -56,6 +56,9 @@
     <form name="registerForm" th:action="@{/register}" method="get">
         <input class = "btn btn-dark" type="submit" value="Register"/>
     </form>
+    <form name="userForm" th:action="@{/user/currentuser}" method="get">
+        <input class = "btn btn-dark" type="submit" value="User Profile"/>
+    </form>
 </section>
 
 <div th:fragment="bootstrap">
