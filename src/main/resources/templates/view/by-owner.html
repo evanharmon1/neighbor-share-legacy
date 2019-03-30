@@ -19,7 +19,6 @@
                 <a th:href="${'/item/' + item.id}"><h3 class="card-title" th:text="${item.name}">Card title</h3></a>
                 <p class="card-text" th:text="'Category: ' + ${item.category.name}">Category</p>
                 <p class="card-text" th:text="'Owner: ' + ${item.user.firstName}">User</p>
-                <a href="#" class="btn btn-primary">Request Item</a>
             </div>
         </div>
     </div>
