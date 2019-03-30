@@ -91,3 +91,10 @@ form {
 .user-section {
     margin: 10px;
 }
+
+#add-item {
+    width: 100px;
+    margin: 10px auto;
+    margin-bottom: 20px;
+
+}

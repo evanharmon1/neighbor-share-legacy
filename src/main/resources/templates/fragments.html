@@ -40,11 +40,11 @@
     </div>
 </nav>
 
-<section th:fragment="item">
+<div id="add-item" th:fragment="item">
     <form name="addForm" th:action="@{/item/add}" method="get">
-        <input class = "btn btn-dark" type="submit" value="Add Item"/>
+        <input class = "btn btn-success" type="submit" value="Add Item"/>
     </form>
-</section>
+</div>
 
 <section class="user-section" th:fragment="user">
     <form name="logoutForm" th:action="@{/logout}" method="post">
