@@ -23,17 +23,14 @@
         </div>
         <div class="form-group">
             <label th:for="category">Category</label>
-            <select name="categoryId" aria-describedby="descriptionHelpBlock">
-                <option th:each="category : ${categories}"
-                        th:text="${category.name}"
-                        th:value="${category.id}">
-                </option>
+            <select th:field="*{category}" aria-describedby="descriptionHelpBlock">
+                <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}" th:selected="${category == currentCategory}"></option>
             </select>
-            <small th:text="${categoryError}" id="categoryHelpBlock" class="form-text text-muted text-danger"></small>
+            <small th:errors="*{category}" id="categoryHelpBlock" class="form-text text-muted text-danger"></small>
         </div>
         <input type="hidden" th:value="*{id}" name="itemId" />
         <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="submit" class="btn btn-danger">Delete Item</button>
+        <a href="delete" class="btn btn-danger">Delete Item</a>
     </form>
 
     <div th:replace="fragments :: bootstrap"></div>

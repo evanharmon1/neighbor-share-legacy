@@ -98,26 +98,42 @@ public class ItemController {
         model.addAttribute("item", item);
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("currentCategory", item.getCategory());
         return "item/edit";
 
     }
 
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public String processEditItem(int itemId, String name, String description, int categoryId) {
+    public String processEditItem(int itemId, String name, String description, int category) {
 
         Optional<Item> optItem = itemRepository.findById(itemId);
         Item item = optItem.get();
 
-        Optional<Category> cat = categoryRepository.findById(categoryId);
-        Category category = cat.get();
+        Optional<Category> cat = categoryRepository.findById(category);
+        Category newCategory = cat.get();
 
 
         item.setName(name);
         item.setDescription(description);
-        item.setCategory(category);
+        item.setCategory(newCategory);
         itemRepository.save(item);
 
         return "redirect:/item/" + itemId;
     }
+
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+    public String deleteItem(@PathVariable int id, Model model) {
+
+        Optional<Item> optItem = itemRepository.findById(id);
+        Item item = optItem.get();
+        itemRepository.delete(item);
+
+        User currentUser = User.getCurrentUser();
+        int userId = currentUser.getId();
+
+        return "redirect:/user/" + userId;
+
+    }
+
 
 }
