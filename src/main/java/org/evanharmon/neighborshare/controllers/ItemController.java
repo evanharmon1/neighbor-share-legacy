@@ -6,7 +6,9 @@ import org.evanharmon.neighborshare.models.User;
 import org.evanharmon.neighborshare.models.repository.CategoryRepository;
 import org.evanharmon.neighborshare.models.repository.ItemRepository;
 import org.evanharmon.neighborshare.models.repository.UserRepository;
+import org.evanharmon.neighborshare.services.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +33,9 @@ public class ItemController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EmailServiceImpl sender;
 
     @RequestMapping(value="", method = RequestMethod.GET)
     public String index(Model model) {
@@ -132,6 +137,19 @@ public class ItemController {
         int userId = currentUser.getId();
 
         return "redirect:/user/" + userId;
+
+    }
+
+    @RequestMapping(value = "/{id}/email", method = RequestMethod.GET)
+    public String email(@PathVariable int id, Model model) {
+
+        Optional<Item> optItem = itemRepository.findById(id);
+        Item item = optItem.get();
+        int itemId = item.getId();
+
+        sender.sendSimpleMessage("evanharmon1@gmail.com","testsubject", "text and some more text");
+
+        return "redirect:/item/" + itemId;
 
     }
 
