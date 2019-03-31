@@ -82,10 +82,18 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String itemDetails(@PathVariable int id, Model model) {
+    public String itemDetails(@PathVariable int id, @RequestParam(value="email", required=false) String email, Model model) {
 
         Optional<Item> optItem = itemRepository.findById(id);
         Item item = optItem.get();
+
+        if (email != null) {
+            model.addAttribute("email", "Your email to " + item.getUser().getFirstName() + " was sent successfully. " + item.getUser().getFirstName() + " will email you if they can lend you the item.");
+            model.addAttribute("item", item);
+            model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("users", userRepository.findAll());
+            return "item/item-detail";
+        }
 
         model.addAttribute("item", item);
         model.addAttribute("categories", categoryRepository.findAll());
@@ -151,11 +159,12 @@ public class ItemController {
         String to = item.getUser().getEmail();
         String from = currentUser.getEmail();
         String requester = currentUser.getFirstName();
+        String subject = "NeighborShare Borrow Request for " + item.getName();
         String body = requester + " would like to borrow your " + requestedItem + ". Please reply to this email to let them know if they can borrow it and how they should pick it up. Thanks!";
 
-        sender.sendSimpleMessage(to,from, "NeighborShare Borrow Request", body);
+        sender.sendSimpleMessage(to,from, subject, body);
 
-        return "redirect:/item/" + id;
+        return "redirect:/item/" + id + "?email=sent";
 
     }
 

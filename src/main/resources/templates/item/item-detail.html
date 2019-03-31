@@ -22,6 +22,9 @@
             <p th:text="${'Owner: ' + item.user.firstName + ' ' + item.user.lastName}" class="card-text"></p>
             <a th:href="${item.id + '/edit'}" class="btn btn-primary">Edit Item</a>
             <a th:href="${item.id + '/email'}" class="btn btn-primary">Request Item</a>
+            <div th:if="${email}">
+                <div class="alert alert-success" th:text="${email}"></div>
+            </div>
         </div>
     </div>
 
