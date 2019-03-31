@@ -15,11 +15,13 @@ public class EmailServiceImpl {
     public JavaMailSender emailSender;
 
     public void sendSimpleMessage(
-            String to, String subject, String text) {
+            String to, String from, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
+        message.setFrom(from);
         message.setSubject(subject);
-        message.setText(text);
+        message.setText(body);
+        message.setReplyTo(from);
         emailSender.send(message);
     }
 

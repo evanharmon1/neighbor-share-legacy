@@ -145,11 +145,17 @@ public class ItemController {
 
         Optional<Item> optItem = itemRepository.findById(id);
         Item item = optItem.get();
-        int itemId = item.getId();
+        User currentUser = User.getCurrentUser();
 
-        sender.sendSimpleMessage("evanharmon1@gmail.com","testsubject", "text and some more text");
+        String requestedItem = item.getName();
+        String to = item.getUser().getEmail();
+        String from = currentUser.getEmail();
+        String requester = currentUser.getFirstName();
+        String body = requester + " would like to borrow your " + requestedItem + ". Please reply to this email to let them know if they can borrow it and how they should pick it up. Thanks!";
 
-        return "redirect:/item/" + itemId;
+        sender.sendSimpleMessage(to,from, "NeighborShare Borrow Request", body);
+
+        return "redirect:/item/" + id;
 
     }
 
