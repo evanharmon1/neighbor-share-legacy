@@ -51,6 +51,11 @@ public class RootController {
             return "register";
         }
 
+        if (!newUser.getPassword().matches(newUser.getVerifyPassword())) {
+            model.addAttribute("title", "Register");
+            model.addAttribute("verifyError", "Passwords do not match");
+            return "register";
+        }
 
         model.addAttribute("title", "User");
         newUser.setPassword(User.passwordEncoder.encode(newUser.getPassword()));

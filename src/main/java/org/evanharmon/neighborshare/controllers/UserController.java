@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,18 +55,39 @@ public class UserController {
     }
 
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public String processEditUser(int userId, String firstName, String lastName, String username, String email, String password, String verifyPassword) {
+    public String processEditUser(@ModelAttribute @Valid User user, Errors errors, Model model, String firstName, String lastName, String username, String email, String password, String verifyPassword, int userId) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit User");
+            Optional<User> optUser = userRepository.findById(userId);
+            User existingUser = optUser.get();
+            model.addAttribute("existingUserId", existingUser.getId());
+            model.addAttribute("user", user);
+            model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("users", userRepository.findAll());
+            return "user/edit";
+        }
+
+        if (!password.matches(verifyPassword)) {
+            Optional<User> optUser = userRepository.findById(userId);
+            User existingUser = optUser.get();
+            model.addAttribute("title", "Edit User");
+            model.addAttribute("verifyError", "Passwords do not match");
+            model.addAttribute("user", existingUser);
+            model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("users", userRepository.findAll());
+            return "user/edit";
+        }
 
         Optional<User> optUser = userRepository.findById(userId);
-        User user = optUser.get();
+        User existingUser = optUser.get();
 
-
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setPassword(User.passwordEncoder.encode(password));
-        userRepository.save(user);
+        existingUser.setFirstName(firstName);
+        existingUser.setLastName(lastName);
+        existingUser.setUsername(username);
+        existingUser.setEmail(email);
+        existingUser.setPassword(User.passwordEncoder.encode(password));
+        userRepository.save(existingUser);
 
         return "redirect:/user/" + userId;
     }

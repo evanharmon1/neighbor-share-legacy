@@ -25,6 +25,7 @@ public class User implements UserDetails {
     private int id;
 
     @NotNull
+    @Size(min=2, message = "username must be at least 2 characters")
     private String username;
 
     @NotNull
