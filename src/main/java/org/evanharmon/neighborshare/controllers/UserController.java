@@ -34,6 +34,9 @@ public class UserController {
         Optional<User> optUser = userRepository.findById(id);
         User user = optUser.get();
 
+        User currentUser = User.getCurrentUser();
+        model.addAttribute("currentUser", currentUser);
+
         model.addAttribute("user", user);
         model.addAttribute("items", user.getItems());
         model.addAttribute("categories", categoryRepository.findAll());
@@ -47,6 +50,9 @@ public class UserController {
         Optional<User> optUser = userRepository.findById(id);
         User user = optUser.get();
 
+        User currentUser = User.getCurrentUser();
+        model.addAttribute("currentUser", currentUser);
+
         model.addAttribute("user", user);
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
@@ -57,6 +63,8 @@ public class UserController {
     @RequestMapping(value = "edit", method = RequestMethod.POST)
     public String processEditUser(@ModelAttribute @Valid User user, Errors errors, Model model, String firstName, String lastName, String username, String email, String password, String verifyPassword, int userId) {
 
+        User currentUser = User.getCurrentUser();
+
         if (errors.hasErrors()) {
             model.addAttribute("title", "Edit User");
             Optional<User> optUser = userRepository.findById(userId);
@@ -65,6 +73,7 @@ public class UserController {
             model.addAttribute("user", user);
             model.addAttribute("categories", categoryRepository.findAll());
             model.addAttribute("users", userRepository.findAll());
+            model.addAttribute("currentUser", currentUser);
             return "user/edit";
         }
 
@@ -77,6 +86,7 @@ public class UserController {
                 model.addAttribute("user", existingUser);
                 model.addAttribute("categories", categoryRepository.findAll());
                 model.addAttribute("users", userRepository.findAll());
+                model.addAttribute("currentUser", currentUser);
                 return "user/edit";
             }
         }

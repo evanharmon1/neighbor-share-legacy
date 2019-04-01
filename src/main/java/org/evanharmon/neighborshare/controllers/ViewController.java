@@ -36,6 +36,9 @@ public class ViewController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
 
+        User currentUser = User.getCurrentUser();
+        model.addAttribute("currentUser", currentUser);
+
         model.addAttribute("items", itemRepository.findAll());
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
@@ -57,6 +60,9 @@ public class ViewController {
             }
         }
 
+        User currentUser = User.getCurrentUser();
+        model.addAttribute("currentUser", currentUser);
+
         model.addAttribute("items", catItems);
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
@@ -77,6 +83,9 @@ public class ViewController {
                 ownerItems.add(item);
             }
         }
+
+        User currentUser = User.getCurrentUser();
+        model.addAttribute("currentUser", currentUser);
 
         model.addAttribute("items", ownerItems);
         model.addAttribute("categories", categoryRepository.findAll());

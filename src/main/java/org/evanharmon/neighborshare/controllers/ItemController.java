@@ -39,6 +39,10 @@ public class ItemController {
 
     @RequestMapping(value="", method = RequestMethod.GET)
     public String index(Model model) {
+
+        User currentUser = User.getCurrentUser();
+        model.addAttribute("currentUser", currentUser);
+
         model.addAttribute("items", itemRepository.findAll());
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
@@ -48,6 +52,10 @@ public class ItemController {
 
     @RequestMapping(value="/add", method = RequestMethod.GET)
     public String add(Model model) {
+
+        User currentUser = User.getCurrentUser();
+        model.addAttribute("currentUser", currentUser);
+
         model.addAttribute("title", "Add Item");
         model.addAttribute(new Item());
         model.addAttribute("categories", categoryRepository.findAll());
@@ -57,12 +65,15 @@ public class ItemController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(@ModelAttribute @Valid Item newItem, Errors errors, @RequestParam(value = "categoryId", required=false) Integer categoryId, Model model) {
 
+        User currentUser = User.getCurrentUser();
+
         if (errors.hasErrors() || categoryId == null) {
             model.addAttribute("title", "Add Item");
             model.addAttribute("categories", categoryRepository.findAll());
             if (categoryId == null) {
                 model.addAttribute("categoryError", "You must choose a category");
             }
+            model.addAttribute("currentUser", currentUser);
             return "item/add";
         }
 
@@ -71,7 +82,6 @@ public class ItemController {
         Category category = cat.get();
         newItem.setCategory(category);
 
-        User currentUser = User.getCurrentUser();
         newItem.setUser(currentUser);
         currentUser.addItem(newItem);
         itemRepository.save(newItem);
@@ -86,6 +96,9 @@ public class ItemController {
 
         Optional<Item> optItem = itemRepository.findById(id);
         Item item = optItem.get();
+
+        User currentUser = User.getCurrentUser();
+        model.addAttribute("currentUser", currentUser);
 
         if (email != null) {
             model.addAttribute("email", "Your email to " + item.getUser().getFirstName() + " was sent successfully. " + item.getUser().getFirstName() + " will email you if they can lend you the item.");
@@ -108,6 +121,9 @@ public class ItemController {
         Optional<Item> optItem = itemRepository.findById(id);
         Item item = optItem.get();
 
+        User currentUser = User.getCurrentUser();
+        model.addAttribute("currentUser", currentUser);
+
         model.addAttribute("item", item);
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
@@ -118,6 +134,9 @@ public class ItemController {
 
     @RequestMapping(value = "edit", method = RequestMethod.POST)
     public String processEditItem(@ModelAttribute @Valid Item item, Errors errors, Model model, int itemId, String name, String description, int category) {
+
+        User currentUser = User.getCurrentUser();
+        model.addAttribute("currentUser", currentUser);
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Edit Item");

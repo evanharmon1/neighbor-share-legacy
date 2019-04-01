@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.springframework.security.core.context.SecurityContextHolder.getContext;
+
 
 @Controller
 public class RootController {
@@ -31,8 +33,15 @@ public class RootController {
 
     @RequestMapping(value = "")
     public String index(Model model) {
-        model.addAttribute("title", "NeighborShare");
-        return "index";
+
+         Object loggedInUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (loggedInUser.equals("anonymousUser")) {
+            model.addAttribute("title", "NeighborShare");
+            return "index";
+        }
+
+        return "redirect:/view";
     }
 
     @RequestMapping(value = "register", method = RequestMethod.GET)

@@ -47,17 +47,11 @@
 </div>
 
 <section class="user-section" th:fragment="user">
-    <form name="logoutForm" th:action="@{/logout}" method="post">
-        <input class = "btn btn-dark" type="submit" value="Logout"/>
-    </form>
     <form name="loginForm" th:action="@{/login}" method="get">
         <input class = "btn btn-dark" type="submit" value="Login"/>
     </form>
     <form name="registerForm" th:action="@{/register}" method="get">
         <input class = "btn btn-dark" type="submit" value="Register"/>
-    </form>
-    <form name="userForm" th:action="@{/user/currentuser}" method="get">
-        <input class = "btn btn-dark" type="submit" value="User Profile"/>
     </form>
 </section>
 
@@ -66,7 +60,7 @@
         <input class = "btn btn-dark" type="submit" value="Logout"/>
     </form>
     <form name="userForm" th:action="@{/user/currentuser}" method="get">
-        <input class = "btn btn-dark" type="submit" value="User Profile"/>
+        <input class = "btn btn-dark" type="submit" th:value="${currentUser.firstName + '''s Account'}"/>
     </form>
 </section>
 
