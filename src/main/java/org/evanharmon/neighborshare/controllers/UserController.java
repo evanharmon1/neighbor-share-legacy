@@ -68,15 +68,17 @@ public class UserController {
             return "user/edit";
         }
 
-        if (!password.matches(verifyPassword)) {
-            Optional<User> optUser = userRepository.findById(userId);
-            User existingUser = optUser.get();
-            model.addAttribute("title", "Edit User");
-            model.addAttribute("verifyError", "Passwords do not match");
-            model.addAttribute("user", existingUser);
-            model.addAttribute("categories", categoryRepository.findAll());
-            model.addAttribute("users", userRepository.findAll());
-            return "user/edit";
+        if (!password.equals(verifyPassword)) {
+            if (!password.equals("******")) {
+                Optional<User> optUser = userRepository.findById(userId);
+                User existingUser = optUser.get();
+                model.addAttribute("title", "Edit User");
+                model.addAttribute("verifyError", "Passwords do not match");
+                model.addAttribute("user", existingUser);
+                model.addAttribute("categories", categoryRepository.findAll());
+                model.addAttribute("users", userRepository.findAll());
+                return "user/edit";
+            }
         }
 
         Optional<User> optUser = userRepository.findById(userId);
@@ -86,7 +88,9 @@ public class UserController {
         existingUser.setLastName(lastName);
         existingUser.setUsername(username);
         existingUser.setEmail(email);
-        existingUser.setPassword(User.passwordEncoder.encode(password));
+        if (!password.equals("******")) {
+            existingUser.setPassword(User.passwordEncoder.encode(password));
+        }
         userRepository.save(existingUser);
 
         return "redirect:/user/" + userId;
