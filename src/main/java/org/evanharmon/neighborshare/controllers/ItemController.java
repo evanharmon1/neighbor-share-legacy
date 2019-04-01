@@ -117,19 +117,30 @@ public class ItemController {
     }
 
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public String processEditItem(int itemId, String name, String description, int category) {
+    public String processEditItem(@ModelAttribute @Valid Item item, Errors errors, Model model, int itemId, String name, String description, int category) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit Item");
+            Optional<Item> optItem = itemRepository.findById(itemId);
+            Item existingItem = optItem.get();
+            model.addAttribute("existingItemId", existingItem.getId());
+            model.addAttribute("item", item);
+            model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("users", userRepository.findAll());
+            return "item/edit";
+        }
 
         Optional<Item> optItem = itemRepository.findById(itemId);
-        Item item = optItem.get();
+        Item existingItem = optItem.get();
 
         Optional<Category> cat = categoryRepository.findById(category);
         Category newCategory = cat.get();
 
 
-        item.setName(name);
-        item.setDescription(description);
-        item.setCategory(newCategory);
-        itemRepository.save(item);
+        existingItem.setName(name);
+        existingItem.setDescription(description);
+        existingItem.setCategory(newCategory);
+        itemRepository.save(existingItem);
 
         return "redirect:/item/" + itemId;
     }
