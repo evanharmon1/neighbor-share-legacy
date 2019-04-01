@@ -29,6 +29,7 @@
             </select>
             <small th:text="${categoryError}" id="categoryHelpBlock" class="form-text text-muted text-danger"></small>
         </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 

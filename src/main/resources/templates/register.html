@@ -41,6 +41,7 @@
                 <small id="verifyPasswordHelpBlock" th:text="${verifyError}" class="form-text text-muted text-danger"></small>
             </div>
         </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 

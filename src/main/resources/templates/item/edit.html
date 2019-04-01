@@ -30,6 +30,7 @@
         </div>
         <input th:unless="${existingItemId}" type="hidden" th:value="*{id}" name="itemId" />
         <input th:if="${existingItemId}" type="hidden" th:value="${existingItemId}" name="itemId" />
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <button type="submit" class="btn btn-primary">Submit</button>
         <a href="delete" class="btn btn-danger">Delete Item</a>
     </form>
