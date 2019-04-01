@@ -6,6 +6,8 @@ import org.evanharmon.neighborshare.models.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -69,6 +71,7 @@ public class RootController {
         model.addAttribute("title", "User");
         newUser.setPassword(User.passwordEncoder.encode(newUser.getPassword()));
         userRepository.save(newUser);
+
         return "redirect:/view";
     }
 
@@ -82,6 +85,7 @@ public class RootController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String processlogin(@ModelAttribute @Valid User user, Errors errors, Model model) {
 
+        // Code below is never run due to Spring Security, I think
         if (errors.hasErrors()) {
             model.addAttribute("title", "Login");
             return "login";

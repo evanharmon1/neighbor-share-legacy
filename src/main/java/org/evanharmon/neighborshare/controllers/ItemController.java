@@ -100,6 +100,10 @@ public class ItemController {
         User currentUser = User.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
 
+        int currentItemOwnerId = item.getUser().getId();
+        int currentUserId = currentUser.getId();
+        boolean canEdit = (currentItemOwnerId == currentUserId);
+
         if (email != null) {
             model.addAttribute("email", "Your email to " + item.getUser().getFirstName() + " was sent successfully. " + item.getUser().getFirstName() + " will email you if they can lend you the item.");
             model.addAttribute("item", item);
@@ -108,6 +112,8 @@ public class ItemController {
             return "item/item-detail";
         }
 
+
+        model.addAttribute("canEdit", canEdit);
         model.addAttribute("item", item);
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
