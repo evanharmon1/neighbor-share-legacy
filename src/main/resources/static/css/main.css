@@ -9,6 +9,10 @@ nav {
     font-size: 20px;
 }
 
+.viewby {
+    display: inline-block;
+}
+
 input[type=submit] {
     color: black;
 }

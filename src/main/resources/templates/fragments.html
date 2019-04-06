@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <title th:text="${title}">NeighborShare</title>
 
-    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
     <script type="text/javascript" th:src="@{/js/script.js}"> </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -21,22 +21,29 @@
 </header>
 
 <nav th:fragment="navigation">View by:
-    <form name="viewForm" th:action="@{/view}" method="get">
+    <form class="viewby" name="viewForm" th:action="@{/view}" method="get">
         <input class = "btn btn-dark" type="submit" value="All"/>
     </form>
 
-    <div class="dropdown">
+    <div class="viewby dropdown">
         <button class="btn btn-dark">Category</button>
         <div class="dropdown-content">
             <a th:href="'/view/category/' + ${category.id}" th:each="category : ${categories}" th:text="${category.name}">Category Name</a>
         </div>
     </div>
 
-    <div class="dropdown">
+    <div class="viewby dropdown">
         <button class="btn btn-dark">Owner</button>
         <div class="dropdown-content">
             <a th:href="'/view/owner/' + ${user.id}" th:each="user : ${users}" th:text="${user.firstName}">Owner Name</a>
         </div>
+    </div>
+    <div class="viewby">
+        <form>
+            <div>
+                <input class="form-control" placeholder="Filter current items" onkeyup="searchItems()" name="search-term" id="search-term" type="text">
+            </div>
+        </form>
     </div>
 </nav>
 
