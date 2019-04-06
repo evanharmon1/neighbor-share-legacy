@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 .antMatchers("/", "/register", "/login", "/css/*", "/js/*", "/img/logo.png").permitAll()
-                .antMatchers("/**", "/view", "/view/*", "/item", "/item/*", "/user", "/user/*").hasAuthority("USER")
+                .antMatchers("/view", "/view/*", "/item", "/item/*", "/user", "/user/*", "/files").hasAuthority("USER")
 
             .and()
 
@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
+
             ;
     }
 

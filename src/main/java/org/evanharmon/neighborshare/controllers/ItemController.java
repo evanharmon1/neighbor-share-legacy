@@ -6,6 +6,7 @@ import org.evanharmon.neighborshare.models.User;
 import org.evanharmon.neighborshare.models.repository.CategoryRepository;
 import org.evanharmon.neighborshare.models.repository.ItemRepository;
 import org.evanharmon.neighborshare.models.repository.UserRepository;
+import org.evanharmon.neighborshare.services.AmazonS3ClientService;
 import org.evanharmon.neighborshare.services.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -36,6 +38,9 @@ public class ItemController {
 
     @Autowired
     private EmailServiceImpl sender;
+
+    @Autowired
+    private AmazonS3ClientService amazonS3ClientService;
 
     @RequestMapping(value="", method = RequestMethod.GET)
     public String index(Model model) {
@@ -63,7 +68,7 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(@ModelAttribute @Valid Item newItem, Errors errors, @RequestParam(value = "categoryId", required=false) Integer categoryId, Model model) {
+    public String add(@ModelAttribute @Valid Item newItem, Errors errors, @RequestParam(value = "categoryId", required=false) Integer categoryId, @RequestPart(value = "file") MultipartFile file, Model model) {
 
         User currentUser = User.getCurrentUser();
 
@@ -77,6 +82,7 @@ public class ItemController {
             return "item/add";
         }
 
+        this.amazonS3ClientService.uploadFileToS3Bucket(file, true);
 
         Optional<Category> cat = categoryRepository.findById(categoryId);
         Category category = cat.get();
