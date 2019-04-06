@@ -82,11 +82,13 @@ public class ItemController {
             return "item/add";
         }
 
+        String filename = "https://s3-us-west-2.amazonaws.com/neighborshare-images/" + file.getOriginalFilename();
         this.amazonS3ClientService.uploadFileToS3Bucket(file, true);
 
         Optional<Category> cat = categoryRepository.findById(categoryId);
         Category category = cat.get();
         newItem.setCategory(category);
+        newItem.setImage(filename);
 
         newItem.setUser(currentUser);
         currentUser.addItem(newItem);
@@ -145,7 +147,7 @@ public class ItemController {
     }
 
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public String processEditItem(@ModelAttribute @Valid Item item, Errors errors, Model model, int itemId, String name, String description, int category) {
+    public String processEditItem(@ModelAttribute @Valid Item item, Errors errors, Model model, int itemId, String name, String description, int category, @RequestPart(value = "file") MultipartFile file) {
 
         User currentUser = User.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
@@ -160,6 +162,8 @@ public class ItemController {
             model.addAttribute("users", userRepository.findAll());
             return "item/edit";
         }
+
+        this.amazonS3ClientService.uploadFileToS3Bucket(file, true);
 
         Optional<Item> optItem = itemRepository.findById(itemId);
         Item existingItem = optItem.get();

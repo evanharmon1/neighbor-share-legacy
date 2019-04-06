@@ -14,7 +14,7 @@
 
     <div th:each="item : ${items}" class="col-sm-3">
         <div class="card" style="width: 18rem;">
-            <a th:href="${'/item/' + item.id}"><img class="card-img-top" src="/img/items/item00001.JPG" alt="Card image cap" style="width: 18rem;"></a>
+            <a th:href="${'/item/' + item.id}"><img class="card-img-top" src="/img/items/default.png" alt="Card image cap" style="width: 18rem;"></a>
             <div class="card-body">
                 <a th:href="${'/item/' + item.id}"><h3 class="card-title" th:text="${item.name}">Card title</h3></a>
                 <p class="card-text" th:text="'Category: ' + ${item.category.name}">Category</p>
