@@ -120,6 +120,7 @@
     </div>
     <input th:unless="${existingItemId}" type="hidden" th:value="*{id}" name="itemId" />
     <input th:if="${existingItemId}" type="hidden" th:value="${existingItemId}" name="itemId" />
+    <img class="card-img-top" th:src="${item.image}" alt="Card image cap" style="width: 22rem;">
     <div class="form-group">
         <label for="image">Change Image</label>
         <input id="image" type="file" name="file">
