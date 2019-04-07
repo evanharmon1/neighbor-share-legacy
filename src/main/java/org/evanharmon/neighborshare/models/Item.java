@@ -31,7 +31,7 @@ public class Item {
     @ManyToOne
     private User user;
 
-    private String image;
+    private String image = "https://s3.us-west-2.amazonaws.com/neighborshare-images/default.png";
 
     public Item(String name, String description) {
         this.name = name;

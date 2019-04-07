@@ -46,6 +46,8 @@
         <input th:if="${existingUserId}" type="hidden" th:value="${existingUserId}" name="userId" />
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="btn btn-danger" id="delete-button" onclick="confirmDelete()">Delete User</div>
+        <a href="delete" class="btn btn-warning" id="confirm-delete" style="display: none;">Confirm Delete?</a>
     </form>
 
     <div th:replace="fragments :: bootstrap"></div>

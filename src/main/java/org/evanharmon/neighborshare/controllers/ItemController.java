@@ -86,13 +86,16 @@ public class ItemController {
             return "item/add";
         }
 
-        String awsFileName = this.amazonS3ClientService.uploadFileToS3Bucket(file, true);
-        String filename = "https://s3-us-west-2.amazonaws.com/neighborshare-images/" + awsFileName;
+
+        if (!file.getOriginalFilename().isEmpty()) {
+            String awsFileName = this.amazonS3ClientService.uploadFileToS3Bucket(file, true);
+            String filename = "https://s3-us-west-2.amazonaws.com/neighborshare-images/" + awsFileName;
+            newItem.setImage(filename);
+        }
 
         Optional<Category> cat = categoryRepository.findById(categoryId);
         Category category = cat.get();
         newItem.setCategory(category);
-        newItem.setImage(filename);
 
         newItem.setUser(currentUser);
         currentUser.addItem(newItem);
@@ -167,14 +170,17 @@ public class ItemController {
             return "item/edit";
         }
 
-        this.amazonS3ClientService.uploadFileToS3Bucket(file, true);
 
         Optional<Item> optItem = itemRepository.findById(itemId);
         Item existingItem = optItem.get();
 
+        if (!file.getOriginalFilename().isEmpty()) {
+            String awsFileName = this.amazonS3ClientService.uploadFileToS3Bucket(file, true);
+            String filename = "https://s3-us-west-2.amazonaws.com/neighborshare-images/" + awsFileName;
+            existingItem.setImage(filename);        }
+
         Optional<Category> cat = categoryRepository.findById(category);
         Category newCategory = cat.get();
-
 
         existingItem.setName(name);
         existingItem.setDescription(description);

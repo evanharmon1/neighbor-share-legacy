@@ -12,16 +12,7 @@
 
     <section th:replace="fragments :: item"></section>
 
-    <div th:each="item : ${items}" class="col-sm-3">
-        <div class="card" style="width: 18rem;">
-            <a th:href="${'/item/' + item.id}"><img class="card-img-top" th:src="${item.image}" alt="Card image cap" style="width: 18rem;"></a>
-            <div class="card-body">
-                <a th:href="${'/item/' + item.id}"><h3 class="card-title" th:text="${item.name}">Card title</h3></a>
-                <p class="card-text" th:text="'Category: ' + ${item.category.name}">Category</p>
-                <p class="card-text" th:text="'Owner: ' + ${item.user.firstName}">User</p>
-            </div>
-        </div>
-    </div>
+    <div th:replace="fragments :: items"></div>
 
     <div th:replace="fragments :: bootstrap"></div>
 </body>

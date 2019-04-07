@@ -3,8 +3,10 @@ package org.evanharmon.neighborshare.controllers;
 import org.evanharmon.neighborshare.models.Item;
 import org.evanharmon.neighborshare.models.User;
 import org.evanharmon.neighborshare.models.repository.CategoryRepository;
+import org.evanharmon.neighborshare.models.repository.ItemRepository;
 import org.evanharmon.neighborshare.models.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,9 @@ public class UserController {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ItemRepository itemRepository;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String userDetails(@PathVariable int id, Model model) {
@@ -104,6 +109,29 @@ public class UserController {
         userRepository.save(existingUser);
 
         return "redirect:/user/" + userId;
+    }
+
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+    public String deleteUser(@PathVariable int id, Model model) {
+
+        User currentUser = User.getCurrentUser();
+        int currentUserId = currentUser.getId();
+
+        if(currentUserId == id) {
+            Optional<User> optUser = userRepository.findById(id);
+            User user = optUser.get();
+            List<Item> items = itemRepository.findAll();
+            for (Item item : items) {
+                if (item.getUser().getId() == id) {
+                    itemRepository.delete(item);
+                }
+            }
+            userRepository.delete(user);
+            SecurityContextHolder.clearContext();
+        }
+
+        return "redirect:/";
+
     }
 
     @RequestMapping(value = "currentuser", method = RequestMethod.GET)
