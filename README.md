@@ -22,6 +22,8 @@ A lot of people buy things like lawncare equipment, tools, camping equipment, co
 - Secure & Private
   - Authentication and authorization implemented with Spring Security that protects user data and prevents phishing and CSRF attacks.
   - Account passwords are hashed and salted protecting against data leaks.
+  - Email messages are sent without exposing users' email address – emails are handled on the back-end.
+  - AWS S3 image filenames are randomized at creation
 
 ## Technology
 

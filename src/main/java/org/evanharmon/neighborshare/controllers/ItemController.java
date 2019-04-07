@@ -1,5 +1,6 @@
 package org.evanharmon.neighborshare.controllers;
 
+import org.apache.commons.io.FilenameUtils;
 import org.evanharmon.neighborshare.models.Item;
 import org.evanharmon.neighborshare.models.Category;
 import org.evanharmon.neighborshare.models.User;
@@ -18,7 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,8 +86,8 @@ public class ItemController {
             return "item/add";
         }
 
-        String filename = "https://s3-us-west-2.amazonaws.com/neighborshare-images/" + file.getOriginalFilename();
-        this.amazonS3ClientService.uploadFileToS3Bucket(file, true);
+        String awsFileName = this.amazonS3ClientService.uploadFileToS3Bucket(file, true);
+        String filename = "https://s3-us-west-2.amazonaws.com/neighborshare-images/" + awsFileName;
 
         Optional<Category> cat = categoryRepository.findById(categoryId);
         Category category = cat.get();
