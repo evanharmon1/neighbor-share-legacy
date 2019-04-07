@@ -190,6 +190,18 @@ public class ItemController {
         return "redirect:/item/" + itemId;
     }
 
+    @RequestMapping(value = "/{id}/delete-image", method = RequestMethod.GET)
+    public String deleteImage(@PathVariable int id, @RequestParam(value = "image") String image) {
+
+        String filename = image.substring(56);
+        this.amazonS3ClientService.deleteFileFromS3Bucket(filename);
+        Item item = itemRepository.getOne(id);
+        item.setImage("https://s3.us-west-2.amazonaws.com/neighborshare-images/default.png");
+        itemRepository.save(item);
+
+        return "redirect:/item/" + id;
+    }
+
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
     public String deleteItem(@PathVariable int id, Model model) {
 

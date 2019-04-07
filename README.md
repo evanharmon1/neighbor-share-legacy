@@ -9,7 +9,7 @@ A lot of people buy things like lawncare equipment, tools, camping equipment, co
   - Users can create a profile and login. They can share a contact email for notifications and requests.
   - Their user profile displays their account information which can be edited.
   - Their profile page lists the items they have added to the site.
-  - Users can delete their account.
+  - Users can delete their account which will automatically delete their shared items.
 - Create, Edit, Delete, & View
   - Users can add items they are willing to share. Item details include title, description, category, owner, and an image of the item.
   - Users can browse items added to the site by owner, category, or list all items on the site via dropdown menus

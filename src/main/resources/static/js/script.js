@@ -22,5 +22,12 @@ function confirmDelete() {
 
     deleteButton.style.display = "none";
     confirmDelete.style.display = "";
+}
 
+function confirmImageDelete() {
+    var deleteButton = document.getElementById("delete-image-button");
+    var confirmDelete = document.getElementById("confirm-delete-image");
+
+    deleteButton.style.display = "none";
+    confirmDelete.style.display = "";
 }
