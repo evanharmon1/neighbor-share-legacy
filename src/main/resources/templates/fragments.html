@@ -20,7 +20,25 @@
     </a>
 </header>
 
-<nav th:fragment="navigation">View by:
+<section th:fragment="user" class="user-section">
+    <form name="loginForm" th:action="@{/login}" method="get">
+        <input class = "btn btn-dark" type="submit" value="Login"/>
+    </form>
+    <form name="registerForm" th:action="@{/register}" method="get">
+        <input class = "btn btn-dark" type="submit" value="Register"/>
+    </form>
+</section>
+
+<section th:fragment="loggedin" class="user-section">
+    <form name="logoutForm" th:action="@{/logout}" method="post">
+        <input class = "btn btn-dark" type="submit" value="Logout"/>
+    </form>
+    <form name="userForm" th:action="@{/user/currentuser}" method="get">
+        <input class = "btn btn-dark" type="submit" th:value="${currentUser.firstName + '''s Account'}"/>
+    </form>
+</section>
+
+<nav th:fragment="viewby">View by:
     <form class="viewby" name="viewForm" th:action="@{/view}" method="get">
         <input class = "btn btn-dark" type="submit" value="All"/>
     </form>
@@ -47,13 +65,33 @@
     </div>
 </nav>
 
-<div id="add-item" th:fragment="item">
+<nav th:fragment="viewby-nofilter">View by:
+    <form class="viewby" name="viewForm" th:action="@{/view}" method="get">
+        <input class = "btn btn-dark" type="submit" value="All"/>
+    </form>
+
+    <div class="viewby dropdown">
+        <button class="btn btn-dark">Category</button>
+        <div class="dropdown-content">
+            <a th:href="'/view/category/' + ${category.id}" th:each="category : ${categories}" th:text="${category.name}">Category Name</a>
+        </div>
+    </div>
+
+    <div class="viewby dropdown">
+        <button class="btn btn-dark">Owner</button>
+        <div class="dropdown-content">
+            <a th:href="'/view/owner/' + ${user.id}" th:each="user : ${users}" th:text="${user.firstName}">Owner Name</a>
+        </div>
+    </div>
+</nav>
+
+<div th:fragment="item" id="add-item">
     <form name="addForm" th:action="@{/item/add}" method="get">
         <input class = "btn btn-success" type="submit" value="Add Item"/>
     </form>
 </div>
 
-<div th:each="item : ${items}" class="col-sm-3" th:fragment="items">
+<div th:fragment="items" th:each="item : ${items}" class="col-sm-3">
     <div class="card text-center">
         <a th:href="${'/item/' + item.id}"><img class="card-img-top" th:src="${item.image}" alt="Card image cap" style="width: 18rem;"></a>
         <div class="card-body">
@@ -64,82 +102,74 @@
     </div>
 </div>
 
-<section class="user-section" th:fragment="user">
-    <form name="loginForm" th:action="@{/login}" method="get">
-        <input class = "btn btn-dark" type="submit" value="Login"/>
-    </form>
-    <form name="registerForm" th:action="@{/register}" method="get">
-        <input class = "btn btn-dark" type="submit" value="Register"/>
-    </form>
-</section>
-
-<section class="user-section" th:fragment="loggedin">
-    <form name="logoutForm" th:action="@{/logout}" method="post">
-        <input class = "btn btn-dark" type="submit" value="Logout"/>
-    </form>
-    <form name="userForm" th:action="@{/user/currentuser}" method="get">
-        <input class = "btn btn-dark" type="submit" th:value="${currentUser.firstName + '''s Account'}"/>
-    </form>
-</section>
-
-<form method="post" th:object="${item}" id="add-item-form" enctype="multipart/form-data" th:fragment="additem">
+<form th:fragment="additem" method="post" th:object="${item}" id="add-item-form" enctype="multipart/form-data">
     <div class="form-group">
-        <label th:for="name">Name</label>
+        <label th:for="name">Name
+            <small th:errors="*{name}" id="nameHelpBlock" class="form-text text-muted text-danger"></small>
+        </label>
         <input class="form-control" type="text" th:field="*{name}" aria-describedby="nameHelpBlock"/>
-        <small th:errors="*{name}" id="nameHelpBlock" class="form-text text-muted text-danger"></small>
     </div>
     <div class="form-group">
-        <label th:for="description">Description</label>
+        <label th:for="description">Description
+            <small th:errors="*{description}" id="descriptionHelpBlock" class="form-text text-muted text-danger"></small>
+        </label>
         <textarea class="form-control" th:field="*{description}" aria-describedby="descriptionHelpBlock" rows="4" cols="5">Text</textarea>
-        <small th:errors="*{description}" id="descriptionHelpBlock" class="form-text text-muted text-danger"></small>
     </div>
     <div class="form-group">
-        <label th:for="category">Category</label>
+        <label th:for="category">Category
+            <small th:text="${categoryError}" id="categoryHelpBlock" class="form-text text-muted text-danger"></small>
+        </label>
         <select name="categoryId" aria-describedby="descriptionHelpBlock">
             <option th:each="category : ${categories}"
                     th:text="${category.name}"
                     th:value="${category.id}">
             </option>
         </select>
-        <small th:text="${categoryError}" id="categoryHelpBlock" class="form-text text-muted text-danger"></small>
     </div>
     <div class="form-group">
         <label for="image">Add Image (optional)</label>
         <input id="image" type="file" name="file">
     </div>
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-btn">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
 </form>
 
-<form method="post" action="/item/edit" th:object="${item}" id="add-item-form" enctype="multipart/form-data" th:fragment="edititem">
+<form th:fragment="edititem" method="post" action="/item/edit" th:object="${item}" id="add-item-form" enctype="multipart/form-data">
     <div class="form-group">
-        <label th:for="name">Name</label>
+        <label th:for="name">Name
+            <small th:errors="*{name}" id="nameHelpBlock" class="form-text text-muted text-danger"></small>
+        </label>
         <input class="form-control" type="text" th:field="*{name}" aria-describedby="nameHelpBlock"/>
-        <small th:errors="*{name}" id="nameHelpBlock" class="form-text text-muted text-danger"></small>
     </div>
     <div class="form-group">
-        <label th:for="description">Description</label>
-        <textarea class="form-control" th:field="*{description}" aria-describedby="descriptionHelpBlock" rows="4" cols="5">Text</textarea>
-        <small th:errors="*{description}" id="descriptionHelpBlock" class="form-text text-muted text-danger"></small>
+        <label th:for="description">Description
+            <small th:errors="*{description}" id="descriptionHelpBlock" class="form-text text-muted text-danger"></small>
+        </label>
+        <textarea class="form-control" th:field="*{description}" aria-describedby="descriptionHelpBlock" rows="4">Text</textarea>
     </div>
     <div class="form-group">
-        <label th:for="category">Category</label>
+        <label th:for="category">Category
+            <small th:errors="*{category}" id="categoryHelpBlock" class="form-text text-muted text-danger"></small>
+        </label>
         <select th:field="*{category}" aria-describedby="descriptionHelpBlock">
             <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}" th:selected="${category == currentCategory}"></option>
         </select>
-        <small th:errors="*{category}" id="categoryHelpBlock" class="form-text text-muted text-danger"></small>
     </div>
     <input th:unless="${existingItemId}" type="hidden" th:value="*{id}" name="itemId" />
     <input th:if="${existingItemId}" type="hidden" th:value="${existingItemId}" name="itemId" />
-    <img class="card-img-top" th:src="${item.image}" alt="Card image cap" style="width: 22rem;">
+    <img class="card-img-top img-edit" th:src="${item.image}" alt="Card image cap" style="width: 22rem;">
     <div class="form-group">
         <label for="image">Change Image</label>
         <input id="image" type="file" name="file">
     </div>
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <div class="btn btn-danger" id="delete-button" onclick="confirmDelete()">Delete Item</div>
-    <a href="delete" class="btn btn-warning" id="confirm-delete" style="display: none;">Confirm Delete?</a>
+    <div class="form-btn">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="btn btn-danger" id="delete-button" onclick="confirmDelete()">Delete Item</div>
+        <a href="delete" class="btn btn-warning" id="confirm-delete" style="display: none;">Confirm Delete?</a>
+    </div>
 </form>
 
 <div th:fragment="bootstrap">

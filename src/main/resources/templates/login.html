@@ -17,7 +17,9 @@
             <small th:text="${errors}" id="passwordHelpBlock" class="form-text text-muted text-danger"></small>
         </div>
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-btn">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </form>
 
     <div th:replace="fragments :: bootstrap"></div>

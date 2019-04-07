@@ -1,6 +1,5 @@
 package org.evanharmon.neighborshare.controllers;
 
-import org.apache.commons.io.FilenameUtils;
 import org.evanharmon.neighborshare.models.Item;
 import org.evanharmon.neighborshare.models.Category;
 import org.evanharmon.neighborshare.models.User;
@@ -68,6 +67,7 @@ public class ItemController {
         model.addAttribute("title", "Add Item");
         model.addAttribute(new Item());
         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("users", userRepository.findAll());
         return "item/add";
     }
 

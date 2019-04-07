@@ -40,10 +40,6 @@ h1 {
     margin: 10px;
 }
 
-textarea {
-    max-width: 400px;
-}
-
 form {
     display: inline;
 }
@@ -110,4 +106,27 @@ form {
 .alert {
     width: 300px;
     margin: 10px auto;
+}
+
+.form-group {
+    min-width: 200px;
+    max-width: 500px;
+    margin-left: 15px;
+}
+
+.form-btn {
+    margin-left: 15px;
+}
+
+small {
+    display: inline-block;
+}
+
+textarea {
+    min-width: 200px;
+    max-width: 100%;
+}
+
+.img-edit {
+    margin-left: 15px;
 }
