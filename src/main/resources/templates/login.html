@@ -5,6 +5,8 @@
 <body>
     <header th:replace="fragments :: header"></header>
 
+    <section th:replace="fragments :: user"></section>
+
     <form method="post" th:object="${user}">
         <div class="form-group">
             <label for="username">Username</label>

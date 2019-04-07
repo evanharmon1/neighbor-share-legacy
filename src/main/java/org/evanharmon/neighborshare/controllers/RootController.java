@@ -57,6 +57,12 @@ public class RootController {
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public String processRegister(@ModelAttribute @Valid User newUser, Errors errors, Model model) {
 
+        if (userRepository.findByUsername(newUser.getUsername()) != null) {
+            model.addAttribute("title", "Register");
+            model.addAttribute("existingUsernameError", "That username has already been registered");
+            return "register";
+        }
+
         if (errors.hasErrors()) {
             model.addAttribute("title", "Register");
             return "register";
