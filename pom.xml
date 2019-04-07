@@ -59,11 +59,6 @@
             <artifactId>aws-java-sdk</artifactId>
             <version>1.11.106</version>
         </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.5</version>
-        </dependency>
     </dependencies>
 
     <build>
