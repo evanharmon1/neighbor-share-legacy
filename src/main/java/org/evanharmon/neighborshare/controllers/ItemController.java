@@ -154,7 +154,7 @@ public class ItemController {
     }
 
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public String processEditItem(@ModelAttribute @Valid Item item, Errors errors, Model model, int itemId, String name, String description, int category, @RequestPart(value = "file") MultipartFile file) {
+    public String processEditItem(@ModelAttribute @Valid Item item, Errors errors, Model model, int itemId, String name, String description, int category, Boolean available, @RequestPart(value = "file") MultipartFile file) {
 
         User currentUser = User.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
@@ -185,6 +185,7 @@ public class ItemController {
         existingItem.setName(name);
         existingItem.setDescription(description);
         existingItem.setCategory(newCategory);
+        existingItem.setAvailable(available);
         itemRepository.save(existingItem);
 
         return "redirect:/item/" + itemId;

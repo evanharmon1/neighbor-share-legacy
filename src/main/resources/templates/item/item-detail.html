@@ -12,26 +12,28 @@
 
     <section th:replace="fragments :: item"></section>
 
-    <div class="card text-center">
-        <div class="card-body">
-            <a th:href="${item.image}"><img th:src="${item.image}" alt="Card image cap" style="width: 28rem;"></a>
-            <h2 th:text="${item.name}" class="card-title"></h2>
-            <p th:text="${'Description: ' + item.description}" class="card-text"></p>
-            <p th:text="${'Category: ' + item.category.name}" class="card-text"></p>
-            <p th:text="${'Owner: ' + item.user.firstName + ' ' + item.user.lastName}" class="card-text"></p>
-            <div th:if="${canEdit}">
-                <a th:href="${item.id + '/edit'}" class="btn btn-primary">Edit Item</a>
-            </div>
-            <div th:unless="${canEdit}">
-                <div class="btn btn-primary" id="delete-button" onclick="confirmDelete()">Request Item</div>
-                <a th:href="${item.id + '/email'}" class="btn btn-warning" id="confirm-delete" style="display: none;">Send Item Request Email?</a>
-            </div>
-            <div th:if="${email}">
-                <div class="alert alert-success" th:text="${email}"></div>
-            </div>
+    <div id="item-detail-div">
+        <div th:text="${'Category: ' + item.category.name}" class="item-detail-text"></div>
+        <div th:text="${'Owner: ' + item.user.firstName + ' ' + item.user.lastName}" class="item-detail-text"></div>
+        <div th:text="${'Description: '}" class="item-detail-text"></div>
+        <p th:text="${item.description}"></p>
+        <div th:unless="${item.available}" class="unavailable item-detail-text">Unavailable</div>
+        <div th:if="${item.available}" class="available item-detail-text">Available</div>
+        <div th:if="${canEdit}">
+            <a th:href="${item.id + '/edit'}" class="btn btn-primary">Edit Item</a>
+        </div>
+        <div th:unless="${canEdit}">
+            <div class="btn btn-primary" id="delete-button" onclick="confirmDelete()">Request Item</div>
+            <a th:href="${item.id + '/email'}" class="btn btn-warning" id="confirm-delete" style="display: none;">Send Item Request Email?</a>
+        </div>
+        <div th:if="${email}">
+            <div class="alert alert-success" th:text="${email}"></div>
         </div>
     </div>
-
+    <div id="image-detail">
+        <h2 th:text="${item.name}"></h2>
+        <a th:href="${item.image}"><img th:src="${item.image}" alt="Card image cap" style="width: 50rem;"></a>
+    </div>
     <div th:replace="fragments :: bootstrap"></div>
 </body>
 </html>

@@ -28,6 +28,8 @@ public class Item {
     @ManyToOne
     private Category category;
 
+    private Boolean available = true;
+
     @ManyToOne
     private User user;
 
@@ -74,6 +76,14 @@ public class Item {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     public User getUser() {

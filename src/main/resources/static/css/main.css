@@ -130,3 +130,35 @@ textarea {
 .img-edit {
     margin-left: 15px;
 }
+
+.available {
+    color: green;
+}
+
+.unavailable {
+    color: red;
+}
+
+#edit-available {
+    margin-left: 30px;
+}
+
+#image-detail {
+    display: inline-block;
+}
+
+#item-detail-div {
+    display: inline-block;
+    margin: 30px;
+
+}
+
+h2 {
+    text-align: center;
+}
+
+.item-detail-text {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 1px;
+}

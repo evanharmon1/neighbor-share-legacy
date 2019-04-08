@@ -126,6 +126,12 @@
         </select>
     </div>
     <div class="form-group">
+        <label th:for="available">Available
+            <small th:errors="*{available}" id="availableHelpBlock" class="form-text text-muted text-danger"></small>
+        </label>
+        <input class="form-control" type="checkbox" th:field="*{available}" aria-describedby="availableHelpBlock"/>
+    </div>
+    <div class="form-group">
         <label for="image">Add Image (optional)</label>
         <input id="image" type="file" name="file">
     </div>
@@ -155,6 +161,11 @@
         <select th:field="*{category}" aria-describedby="descriptionHelpBlock">
             <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}" th:selected="${category == currentCategory}"></option>
         </select>
+        <label th:for="available">
+            <small th:errors="*{available}" id="availableHelpBlock" class="form-text text-muted text-danger"></small>
+        </label>
+        <input type="checkbox" th:field="*{available}" aria-describedby="availableHelpBlock" id="edit-available"/>
+        <span>Item available for sharing?</span>
     </div>
     <input th:unless="${existingItemId}" type="hidden" th:value="*{id}" name="itemId" />
     <input th:if="${existingItemId}" type="hidden" th:value="${existingItemId}" name="itemId" />
