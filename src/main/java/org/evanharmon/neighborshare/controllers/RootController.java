@@ -4,6 +4,7 @@ import org.evanharmon.neighborshare.models.User;
 import org.evanharmon.neighborshare.models.repository.CategoryRepository;
 import org.evanharmon.neighborshare.models.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -55,7 +56,14 @@ public class RootController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String processRegister(@ModelAttribute @Valid User newUser, Errors errors, Model model) {
+    public String processRegister(@ModelAttribute @Valid User newUser, Errors errors, Model model, @RequestParam(value = "siteAccessPassword") String siteAccessPassword) {
+
+        String env_site_access_password = System.getenv("SITE_ACCESS_PASSWORD");
+        if (!siteAccessPassword.equals(env_site_access_password)) {
+            model.addAttribute("title", "Register");
+            model.addAttribute("siteAccessPasswordError", "Site Access Password is incorrect. Please contact Evan to get access to this site.");
+            return "register";
+        }
 
         if (userRepository.findByUsername(newUser.getUsername()) != null) {
             model.addAttribute("title", "Register");
