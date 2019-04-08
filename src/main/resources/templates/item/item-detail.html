@@ -23,8 +23,10 @@
             <a th:href="${item.id + '/edit'}" class="btn btn-primary">Edit Item</a>
         </div>
         <div th:unless="${canEdit}">
-            <div class="btn btn-primary" id="delete-button" onclick="confirmDelete()">Request Item</div>
-            <a th:href="${item.id + '/email'}" class="btn btn-warning" id="confirm-delete" style="display: none;">Send Item Request Email?</a>
+            <div th:if="${isAvailable}">
+                <div class="btn btn-primary" id="delete-button" onclick="confirmDelete()">Request Item</div>
+                <a th:href="${item.id + '/email'}" class="btn btn-warning" id="confirm-delete" style="display: none;">Send Item Request Email?</a>
+            </div>
         </div>
         <div th:if="${email}">
             <div class="alert alert-success" th:text="${email}"></div>

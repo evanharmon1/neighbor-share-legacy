@@ -123,18 +123,22 @@ public class ItemController {
         String defaultImagePath = "https://s3.us-west-2.amazonaws.com/neighborshare-images/default.png";
         boolean defaultImage = (currentImagePath.equals(defaultImagePath));
 
+        boolean isAvailable = (item.getAvailable() == true);
+
         if (email != null) {
             model.addAttribute("email", "Your email to " + item.getUser().getFirstName() + " was sent successfully. " + item.getUser().getFirstName() + " will email you if they can lend you the item.");
             model.addAttribute("item", item);
             model.addAttribute("categories", categoryRepository.findAll());
             model.addAttribute("users", userRepository.findAll());
             model.addAttribute("defaultImage", defaultImage);
+            model.addAttribute("isAvailable", isAvailable);
             return "item/item-detail";
         }
 
 
         model.addAttribute("canEdit", canEdit);
         model.addAttribute("defaultImage", defaultImage);
+        model.addAttribute("isAvailable", isAvailable);
         model.addAttribute("item", item);
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
@@ -191,7 +195,12 @@ public class ItemController {
         existingItem.setName(name);
         existingItem.setDescription(description);
         existingItem.setCategory(newCategory);
-        existingItem.setAvailable(available);
+        if (available == null) {
+            existingItem.setAvailable(false);
+        }
+        else {
+            existingItem.setAvailable(available);
+        }
         itemRepository.save(existingItem);
 
         return "redirect:/item/" + itemId;
