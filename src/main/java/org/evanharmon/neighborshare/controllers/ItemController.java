@@ -119,16 +119,22 @@ public class ItemController {
         int currentUserId = currentUser.getId();
         boolean canEdit = (currentItemOwnerId == currentUserId);
 
+        String currentImagePath = item.getImage();
+        String defaultImagePath = "https://s3.us-west-2.amazonaws.com/neighborshare-images/default.png";
+        boolean defaultImage = (currentImagePath.equals(defaultImagePath));
+
         if (email != null) {
             model.addAttribute("email", "Your email to " + item.getUser().getFirstName() + " was sent successfully. " + item.getUser().getFirstName() + " will email you if they can lend you the item.");
             model.addAttribute("item", item);
             model.addAttribute("categories", categoryRepository.findAll());
             model.addAttribute("users", userRepository.findAll());
+            model.addAttribute("defaultImage", defaultImage);
             return "item/item-detail";
         }
 
 
         model.addAttribute("canEdit", canEdit);
+        model.addAttribute("defaultImage", defaultImage);
         model.addAttribute("item", item);
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
