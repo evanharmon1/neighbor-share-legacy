@@ -38,3 +38,13 @@ A lot of people buy things like lawncare equipment, tools, camping equipment, co
 * Spring Boot Maill for dynamic email message generation and sending
 * AWS S3 API for storing user's item images
 * Maven for dependency management and build automation
+
+## Deployment
+
+* Ubuntu 18.04 on a Digital Ocean VM
+* LAMP stack with NGINX reverse proxy and phpMyAdmin
+
+
+
+
+
