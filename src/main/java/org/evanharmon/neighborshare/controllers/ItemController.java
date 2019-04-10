@@ -180,7 +180,6 @@ public class ItemController {
             return "item/edit";
         }
 
-
         Optional<Item> optItem = itemRepository.findById(itemId);
         Item existingItem = optItem.get();
 

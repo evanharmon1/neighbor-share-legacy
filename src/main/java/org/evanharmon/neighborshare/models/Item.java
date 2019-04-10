@@ -21,8 +21,7 @@ public class Item {
     @Size(min=2, max=30)
     private String name;
 
-    @NotNull
-    @Size(min=2, max=999)
+    @Size(max=999)
     private String description;
 
     @ManyToOne
