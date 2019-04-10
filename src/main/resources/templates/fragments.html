@@ -21,36 +21,36 @@
 
 <section th:fragment="user" class="user-section">
     <form name="loginForm" th:action="@{/login}" method="get">
-        <input class = "btn btn-dark" type="submit" value="Login"/>
+        <input class = "btn btn-primary" type="submit" value="Login"/>
     </form>
     <form name="registerForm" th:action="@{/register}" method="get">
-        <input class = "btn btn-dark" type="submit" value="Register"/>
+        <input class = "btn btn-primary" type="submit" value="Register"/>
     </form>
 </section>
 
 <section th:fragment="loggedin" class="user-section">
     <form name="logoutForm" th:action="@{/logout}" method="post">
-        <input class = "btn btn-dark" type="submit" value="Logout"/>
+        <input class = "btn btn-primary" type="submit" value="Logout"/>
     </form>
     <form name="userForm" th:action="@{/user/currentuser}" method="get">
-        <input class = "btn btn-dark" type="submit" th:value="${currentUser.firstName + '''s Account'}"/>
+        <input class = "btn btn-primary" type="submit" th:value="${currentUser.firstName + '''s Account'}"/>
     </form>
 </section>
 
 <nav th:fragment="viewby">View by:
     <form class="viewby" name="viewForm" th:action="@{/view}" method="get">
-        <input class = "btn btn-dark" type="submit" value="All"/>
+        <input class = "btn btn-primary" type="submit" value="All"/>
     </form>
 
-    <div class="viewby dropdown">
-        <button class="btn btn-dark">Category</button>
+    <div class="viewby dropdown ">
+        <button class="btn btn-primary " style="color: black;">Category</button>
         <div class="dropdown-content">
             <a th:href="'/view/category/' + ${category.id}" th:each="category : ${categories}" th:text="${category.name}">Category Name</a>
         </div>
     </div>
 
     <div class="viewby dropdown">
-        <button class="btn btn-dark">Owner</button>
+        <button class="btn btn-primary" style="color: black;">Owner</button>
         <div class="dropdown-content">
             <a th:href="'/view/owner/' + ${user.id}" th:each="user : ${users}" th:text="${user.firstName}">Owner Name</a>
         </div>
@@ -66,18 +66,18 @@
 
 <nav th:fragment="viewby-nofilter">View by:
     <form class="viewby" name="viewForm" th:action="@{/view}" method="get">
-        <input class = "btn btn-dark" type="submit" value="All"/>
+        <input class = "btn btn-primary" type="submit" value="All"/>
     </form>
 
     <div class="viewby dropdown">
-        <button class="btn btn-dark">Category</button>
+        <button class="btn btn-primary" style="color: black;">Category</button>
         <div class="dropdown-content">
             <a th:href="'/view/category/' + ${category.id}" th:each="category : ${categories}" th:text="${category.name}">Category Name</a>
         </div>
     </div>
 
     <div class="viewby dropdown">
-        <button class="btn btn-dark">Owner</button>
+        <button class="btn btn-primary" style="color: black;">Owner</button>
         <div class="dropdown-content">
             <a th:href="'/view/owner/' + ${user.id}" th:each="user : ${users}" th:text="${user.firstName}">Owner Name</a>
         </div>
