@@ -38,8 +38,8 @@ Users can type a search term or browse shared items by category or owner and can
 * Spring Boot
 * Spring Data/JPA/Hibernate/MySQL
 * Thymeleaf templates and Bootstrap components
-* Spring Security for authenitication and authorization of registered user areas including password hashing and salting for user data privacy and CSRF attack prevention via secure tokens
-* Spring Boot Maill for dynamic email message generation and sending
+* Spring Security for authentication and authorization of registered user areas including password hashing and salting for user data privacy and CSRF attack prevention via secure tokens
+* Spring Boot Mail for dynamic email message generation and sending
 * AWS S3 API for storing user's item images
 * Maven for dependency management and build automation
 
