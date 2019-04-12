@@ -38,19 +38,14 @@ h1 {
     display: inline;
     font-size: 3em;
     margin: 10px;
+    color: rgb(33, 136, 56);;
 }
 
 form {
     display: inline;
 }
 
-.col-sm-4 {
-    margin: 10px;
-}
 
-.col-sm-3 {
-    margin-top: 50px;
-}
 
  /* Dropdown Button */
 
@@ -166,4 +161,26 @@ h2 {
 #homepage {
     max-width: 80%;
     margin: auto;
+}
+
+.card-img-top {
+    width: 100%;
+}
+
+.card-body {
+    padding: 2px;
+}
+
+.card-title {
+    color: rgb(0, 105, 217);
+    margin-bottom: 2px;
+}
+
+.card-text {
+    margin-bottom: 2px;
+    color: black;
+}
+
+#search-term {
+    margin: 10px;
 }
