@@ -1,11 +1,15 @@
 body {
     font-family: sans-serif;
-    color: #6c71c4;
+    color: black;
     background-color: ghostwhite;
 }
 
+#site-title {
+    text-decoration: none;
+}
+
 nav {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 20px;
 }
 
@@ -94,7 +98,7 @@ form {
 #add-item {
     width: 100px;
     margin: 10px;
-    margin-bottom: 20px;
+    margin-top: 0px;
 
 }
 
@@ -124,6 +128,7 @@ textarea {
 
 .img-edit {
     margin-left: 15px;
+    max-width: 10em;
 }
 
 .available {
@@ -163,10 +168,6 @@ h2 {
     margin: auto;
 }
 
-.card-img-top {
-    width: 100%;
-}
-
 .card-body {
     padding: 2px;
 }
@@ -183,4 +184,22 @@ h2 {
 
 #search-term {
     margin: 10px;
+    margin-bottom: 0px;
+}
+
+/* Attempt to fix orientation issue from mobile img uploads */
+img {
+    image-orientation: from-image;
+}
+
+#user-details {
+    max-width: 70%;
+    margin: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+h4 {
+    text-align: center;
+    color: rgb(0, 105, 217);
 }

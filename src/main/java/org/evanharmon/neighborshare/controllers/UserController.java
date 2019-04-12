@@ -41,7 +41,7 @@ public class UserController {
 
         User currentUser = User.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
-
+        model.addAttribute("title", "NeighborShare");
         model.addAttribute("user", user);
         model.addAttribute("items", user.getItems());
         model.addAttribute("categories", categoryRepository.findAll());
@@ -57,7 +57,7 @@ public class UserController {
 
         User currentUser = User.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
-
+        model.addAttribute("title", "NeighborShare");
         model.addAttribute("user", user);
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());

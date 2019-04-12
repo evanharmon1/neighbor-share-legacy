@@ -50,7 +50,7 @@ public class ItemController {
 
         User currentUser = User.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
-
+        model.addAttribute("title", "NeighborShare");
         model.addAttribute("items", itemRepository.findAll());
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
@@ -64,7 +64,7 @@ public class ItemController {
         User currentUser = User.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
 
-        model.addAttribute("title", "Add Item");
+        model.addAttribute("title", "NeighborShare - Add Item");
         model.addAttribute(new Item());
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
@@ -128,6 +128,7 @@ public class ItemController {
         if (email != null) {
             model.addAttribute("email", "Your email to " + item.getUser().getFirstName() + " was sent successfully. " + item.getUser().getFirstName() + " will email you if they can lend you the item.");
             model.addAttribute("item", item);
+            model.addAttribute("title", "NeighborShare");
             model.addAttribute("categories", categoryRepository.findAll());
             model.addAttribute("users", userRepository.findAll());
             model.addAttribute("defaultImage", defaultImage);
@@ -137,6 +138,7 @@ public class ItemController {
 
 
         model.addAttribute("canEdit", canEdit);
+        model.addAttribute("title", "NeighborShare");
         model.addAttribute("defaultImage", defaultImage);
         model.addAttribute("isAvailable", isAvailable);
         model.addAttribute("item", item);
@@ -154,7 +156,7 @@ public class ItemController {
 
         User currentUser = User.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
-
+        model.addAttribute("title", "NeighborShare");
         model.addAttribute("item", item);
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());

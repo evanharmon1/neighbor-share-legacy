@@ -49,7 +49,7 @@ public class RootController {
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public String register(Model model) {
-        model.addAttribute("title", "Register");
+        model.addAttribute("title", "NeighborShare - Register");
         model.addAttribute(new User());
 
         return "register";
@@ -91,7 +91,7 @@ public class RootController {
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login(Model model) {
-        model.addAttribute("title", "Login");
+        model.addAttribute("title", "NeighborShare - Login");
         model.addAttribute(new User());
         return "login";
     }

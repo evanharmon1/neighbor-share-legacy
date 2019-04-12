@@ -10,7 +10,7 @@
 <body>
 
 <header th:fragment="header">
-    <a href="/view">
+    <a href="/view" id="site-title">
         <div class="header">
             <img src="/img/logo.png" width="50" alt="Neighbor Share Logo">
             <h1> NeighborShare</h1>
@@ -168,7 +168,7 @@
     </div>
     <input th:unless="${existingItemId}" type="hidden" th:value="*{id}" name="itemId" />
     <input th:if="${existingItemId}" type="hidden" th:value="${existingItemId}" name="itemId" />
-    <img class="card-img-top img-edit" th:src="${item.image}" alt="Card image cap" style="width: 12rem;">
+    <img class="card-img-top img-edit" th:src="${item.image}" alt="Card image cap">
     <div class="form-group">
         <label for="image">Change Image</label>
         <input id="image" type="file" name="file">

@@ -12,9 +12,7 @@
 
     <section th:replace="fragments :: item"></section>
 
-    <div class="card text-center">
-        <div class="card-header">
-        </div>
+    <div class="card text-center" id="user-details">
         <div class="card-body">
             <h2 th:text="${user.firstName + '''s Details'}" class="card-title"></h2>
             <p th:text="${'First Name: ' + user.firstName}" class="card-text"></p>
@@ -25,7 +23,13 @@
         </div>
     </div>
 
-    <div th:replace="fragments :: items"></div>
+    <h4>Evan's Items</h4>
+
+    <div class="container">
+        <div class="row">
+            <div th:replace="fragments :: items"></div>
+        </div>
+    </div>
 
     <div th:replace="fragments :: bootstrap"></div>
 </body>

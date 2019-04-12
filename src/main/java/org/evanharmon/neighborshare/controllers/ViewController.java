@@ -38,7 +38,7 @@ public class ViewController {
 
         User currentUser = User.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
-
+        model.addAttribute("title", "NeighborShare");
         model.addAttribute("items", itemRepository.findAll());
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
@@ -62,7 +62,7 @@ public class ViewController {
 
         User currentUser = User.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
-
+        model.addAttribute("title", "NeighborShare");
         model.addAttribute("items", catItems);
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
@@ -86,7 +86,7 @@ public class ViewController {
 
         User currentUser = User.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
-
+        model.addAttribute("title", "NeighborShare");
         model.addAttribute("items", ownerItems);
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
