@@ -42,14 +42,14 @@
     </form>
 
     <div class="viewby dropdown ">
-        <button class="btn btn-primary " style="color: black;">Category</button>
+        <button class="btn btn-primary ">Category</button>
         <div class="dropdown-content">
             <a th:href="'/view/category/' + ${category.id}" th:each="category : ${categories}" th:text="${category.name}">Category Name</a>
         </div>
     </div>
 
     <div class="viewby dropdown">
-        <button class="btn btn-primary" style="color: black;">Owner</button>
+        <button class="btn btn-primary">Owner</button>
         <div class="dropdown-content">
             <a th:href="'/view/owner/' + ${user.id}" th:each="user : ${users}" th:text="${user.firstName}">Owner Name</a>
         </div>
@@ -69,14 +69,14 @@
     </form>
 
     <div class="viewby dropdown">
-        <button class="btn btn-primary" style="color: black;">Category</button>
+        <button class="btn btn-primary">Category</button>
         <div class="dropdown-content">
             <a th:href="'/view/category/' + ${category.id}" th:each="category : ${categories}" th:text="${category.name}">Category Name</a>
         </div>
     </div>
 
     <div class="viewby dropdown">
-        <button class="btn btn-primary" style="color: black;">Owner</button>
+        <button class="btn btn-primary">Owner</button>
         <div class="dropdown-content">
             <a th:href="'/view/owner/' + ${user.id}" th:each="user : ${users}" th:text="${user.firstName}">Owner Name</a>
         </div>

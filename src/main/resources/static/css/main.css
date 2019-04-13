@@ -17,9 +17,11 @@ nav {
     display: inline-block;
 }
 
+/*
 input[type=submit] {
     color: black;
 }
+*/
 
 a {
     color: #2aa198;
@@ -79,13 +81,21 @@ form {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+    background-color: rgb(0, 105, 217);
+    color: white;
+}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+    text-decoration-color: white;
+}
 
 .browse-element {
     font-size: 14px;
@@ -208,6 +218,10 @@ h4 {
     margin-bottom: 10px;
 }
 
-card {
-    margin-bottom: 25px;
+.btn {
+    color: white;
+}
+
+button {
+    color: white;
 }
