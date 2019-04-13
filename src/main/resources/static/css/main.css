@@ -160,11 +160,12 @@ textarea {
 #item-detail-div {
     display: inline-block;
     margin: 30px;
-
+    max-width: 250px;
 }
 
 h2 {
     text-align: center;
+    color: rgb(0, 105, 217);
 }
 
 .item-detail-text {
@@ -211,7 +212,7 @@ img {
 
 h4 {
     text-align: center;
-    color: rgb(0, 105, 217);
+    color: rgb(33, 136, 56);
 }
 
 .col-md-3 {
