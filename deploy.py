@@ -10,6 +10,7 @@ backup = subprocess.run(['ssh', 'neighborshare@neighbor-share.org', 'mv', 'neigh
 
 mv = subprocess.run(['ssh', 'neighborshare@neighbor-share.org', 'mv', 'neighbor-share/neighborshare-0.0.1-SNAPSHOT.jar', 'neighbor-share/neighborshare-0.0.2-SNAPSHOT.jar'])
 
+# systemctl restart allowed without password due to that command being added to the /etc/sudoers.d/ directory
 restart = subprocess.run(['ssh', 'neighborshare@neighbor-share.org', 'sudo', 'systemctl', 'restart', 'neighborshare.service'])
 
 print(mvn)
