@@ -1,15 +1,15 @@
-#NeighborShare
+# NeighborShare
 
 ### Java Spring Boot webapp for sharing household items with neighbors, friends, and family
 
 A lot of people buy things like lawncare equipment, tools, camping equipment, cooking utensils, etc. that they use only occasionally and the items just sit there unused most of the time. This wastes money, takes up space, and isn't efficient. If people could easily show what items they own that others could borrow, it would save a lot of money and be a more efficient use of everyone's resources. Users can create an account, add items to share, and see what items other users have offered to share.
 
-<img src="browse.png" width="600">
+<img src="browse.png" width="600" align="center">
 
 Users can type a search term or browse shared items by category or owner and can click a button to automatically generate an email notifying the owner of the user's desire to borrow that item.
 
 Users can use the app from their phone as well as add items with their phone's camera.
-<img src="phone.png" width="300" align="left">                               <img src="phone-camera.png" width="300" align="right">
+<img src="phone.png" width="300">                               <img src="phone-camera.png" width="300">
 
 ## Features
 
