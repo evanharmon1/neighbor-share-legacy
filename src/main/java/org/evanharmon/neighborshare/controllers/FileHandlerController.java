@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.HashMap;
 import java.util.Map;
 
+
+//Not used
 @RestController
 @RequestMapping("/files")
 public class FileHandlerController {
